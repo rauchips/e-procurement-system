@@ -28,8 +28,12 @@ const Navbar = () => {
                     </li>
                 </ul>
                 <div>
+                <Link to = "/sign">
                     <button className='btn btn-primary btn-md m-2'>Entity Registration</button>
+                </Link>
+                <Link to = "/sign">
                     <button className='btn btn-primary btn-md m-2'>Login</button>
+                </Link>
                 </div>
                 </div>
             </div>
