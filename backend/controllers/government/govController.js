@@ -9,9 +9,11 @@ const Tender = require('../../models/tender')
 
 exports.getEntity = async (req, res, next) => {
   try {
+    
     await Gov.find()
       .then((result) => res.json(result))
       .catch((err) => console.error(err))
+
   } catch (error) {
     console.error(error);
     next(error);
@@ -40,6 +42,7 @@ exports.postEntity = async (req, res, next) => {
     newEntity.save()
       .then((result) => res.status(201).json(result))
       .catch((err) => console.error(err))
+
   } catch (error) {
     console.error(error);
     next(error);
@@ -64,6 +67,7 @@ exports.loginEntity = async (req, res, next) => {
       message: 'Login Successful',
       data
     })
+
   } catch (error) {
     console.error(error);
     next(error);
