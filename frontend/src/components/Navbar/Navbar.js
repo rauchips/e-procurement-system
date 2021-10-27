@@ -26,15 +26,34 @@ const Navbar = () => {
                     <li className="nav-item">
                     <button className='btn btn-secondary nav-link btn-sm'>Government Entities</button>
                     </li>
+                
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Registration
+                        </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <Link to = "/government/sign">
+                    <button className='btn btn-primary btn-md m-2'>Entity</button>
+                    </Link>
+                    <Link to = "/supplier/sign">
+                        <button className='btn btn-primary btn-md m-2'>Supplier</button>
+                    </Link>
+                    </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Login
+                        </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <Link to = "/government/sign">
+                    <button className='btn btn-primary btn-md m-2'>Entity</button>
+                    </Link>
+                    <Link to = "/supplier/sign">
+                        <button className='btn btn-primary btn-md m-2'>Supplier</button>
+                    </Link>
+                    </ul>
+                    </li>
                 </ul>
-                <div>
-                <Link to = "/sign">
-                    <button className='btn btn-primary btn-md m-2'>Entity Registration</button>
-                </Link>
-                <Link to = "/sign">
-                    <button className='btn btn-primary btn-md m-2'>Login</button>
-                </Link>
-                </div>
                 </div>
             </div>
             </nav>
