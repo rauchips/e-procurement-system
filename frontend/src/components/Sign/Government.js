@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "./Sign.css";
 
-const  Sign = () => {
+const  GovernmentSign = () => {
     const initialState = {entity:"",telephone:"",address:"",county:"",website:"",name:"",email:"",password:""}
     const [formData,setFormData] = useState(initialState)
     const [errors,setErrors] = useState([])
@@ -155,4 +155,4 @@ const  Sign = () => {
         </div>
     )
 }
-export default Sign;
+export default GovernmentSign;
