@@ -1,12 +1,11 @@
 const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 
-const govEntitySchema = mongoose.Schema({
-  entity: String,
+const vendorSchema = mongoose.Schema({
+  company: String,
   telephone: String,
-  county: String,
   address: String,
-  website: String,
+  DOR: String,
   representative: {
     name: String,
     email: String,
@@ -18,10 +17,10 @@ const govEntitySchema = mongoose.Schema({
   }
 })
 
-govEntitySchema.pre('save', async function(next) {
+vendorSchema.pre('save', async function(next) {
   if(!this.isModified('representative.password')) next()
   this.representative.password = await bcrypt.hash(this.representative.password,12)
   next();
 });
 
-module.exports = mongoose.model('entities', govEntitySchema);
+module.exports = mongoose.model('vendors', vendorSchema);

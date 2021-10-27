@@ -6,7 +6,7 @@ const cors = require("cors");
 const mongoose = require('mongoose');
 
 const governmentRouter = require('./routes/government');
-const usersRouter = require('./routes/users');
+const vendorRouter = require('./routes/vendor');
 
 const app = express();
 
@@ -24,6 +24,6 @@ app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/government', governmentRouter);
-app.use('/users', usersRouter);
+app.use('/api/vendor', vendorRouter);
 
 module.exports = app;
