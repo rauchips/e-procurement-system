@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import Navbar from "../Navbar/Navbar"
-import "./Sign.css";
+import "../Sign/Sign.css";
 
-const  GovernmentSign = () => {
-    const initialState = {entity:"",telephone:"",address:"",county:"",website:"",name:"",email:"",password:""}
+const  CommitteeSign = () => {
+    const initialState = {name:"",telephone:"",email:"",password:""}
     const [formData,setFormData] = useState(initialState)
     const [errors,setErrors] = useState([])
     const [isSignUp,setIsSignUp] = useState(true);
@@ -18,25 +17,13 @@ const  GovernmentSign = () => {
     
     const onSubmit = (e) => {
         e.preventDefault()
-        const post = {
-            entity:formData.entity,
-            telephone:formData.telephone,
-            county:formData.county,
-            address:formData.address,
-            website:formData.website,
-            representative:{
-                name:formData.name,
-                email:formData.email,
-                password:formData.password
-            }
-        }
         if (isSignUp) {
-        fetch ("http://localhost:5000/api/government/register", {
+        fetch ("http://localhost:5000/api/committee/register", {
             method:"POST",
             headers:{
                 'Content-Type':'application/json'
             },
-            body:JSON.stringify (post)
+            body:JSON.stringify (formData)
         })
         .then(res => res.json())
         .then(json => {
@@ -44,17 +31,17 @@ const  GovernmentSign = () => {
             if (json.message) {
                 setErrors(json.message)
             } else {
-                localStorage.setItem("entityprofile",JSON.stringify({json}))
-                history.push("/government/home")
+                localStorage.setItem("committeeprofile",JSON.stringify({json}))
+                history.push("/committee/home")
             }
         })
     }else {
-        fetch ("http://localhost:5000/api/government/login", {
+        fetch ("http://localhost:5000/api/committee/login", {
             method:"POST",
             headers:{
                 'Content-Type':'application/json'
             },
-            body:JSON.stringify (post)
+            body:JSON.stringify (formData)
         })
         .then(res => res.json())
         .then(json => {
@@ -62,8 +49,8 @@ const  GovernmentSign = () => {
             if (json.message) {
                 setErrors(json.message)
             } else {
-                localStorage.setItem("entityprofile",JSON.stringify({json}))
-                history.push("/government/home")
+                localStorage.setItem("committeeprofile",JSON.stringify({json}))
+                history.push("/committee/home")
             }
         })
     }
@@ -71,58 +58,32 @@ const  GovernmentSign = () => {
     }
     return (
         <div>
-            <Navbar/>
             <div className="container sign">
                 {isSignUp?
-                <h5 className="text-center mb-3">Entity Registration</h5>
-                :<h5 className="text-center mb-3">Entity Login</h5>}
+                <h5 className="text-center mb-3">Committee Registration</h5>
+                :<h5 className="text-center mb-3">Committee Login</h5>}
                 {isSignUp?
                 <>
+                  <div className="container login">
                 <form onSubmit={onSubmit}>
-                    <div className='row padding'>
-                        <div className="col-md-12 col-sm-12 col-lg-6">
                             <div className="card">
-                            <h5 className="text-center">Government Entity</h5>
                                 <div className="mb-3">
-                                    <label for="exampleInputEmail1"  className="form-label">Entity Name</label>
-                                    <input onChange={handleChange} type="text" name="entity"  className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+                                    <label for="exampleInputEmail1"  className="form-label">Name</label>
+                                    <input onChange={handleChange} type="text" name="name"  className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
                                 </div>
                                 <div className="mb-3">
                                     <label for="exampleInputPassword1"  className="form-label">Telephone</label>
                                     <input onChange={handleChange} type="text" name="telephone" className="form-control" id="exampleInputPassword1"/>
                                 </div>
                                 <div className="mb-3">
-                                    <label for="exampleInputPassword1"  className="form-label">Postal Address</label>
-                                    <input onChange={handleChange} type="text" name="address" className="form-control" id="exampleInputPassword1"/>
-                                </div>
-                                <div className="mb-3">
-                                    <label for="exampleInputEmail1"  className="form-label">County</label>
-                                    <input onChange={handleChange} type="text" name="county" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
-                                </div>
-                                <div className="mb-3">
-                                    <label for="exampleInputPassword1"  className="form-label">Website</label>
-                                    <input onChange={handleChange} type="text" name="website" className="form-control" id="exampleInputPassword1"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-md-12 col-sm-12 col-lg-6">
-                            <div className="card">
-                            <h5 className="text-center">Government Representative</h5>
-                                <div className="mb-3">
-                                    <label for="exampleInputEmail1"  className="form-label">Name</label>
-                                    <input onChange={handleChange} type="text" name="name" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
-                                </div>
-                                <div className="mb-3">
-                                    <label for="exampleInputPassword1"  className="form-label">Email</label>
-                                    <input onChange={handleChange} type="email" name="email" className="form-control" id="exampleInputPassword1"/>
+                                    <label for="exampleInputEmail1"  className="form-label">Email</label>
+                                    <input onChange={handleChange} type="email" name="Email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
                                 </div>
                                 <div className="mb-3">
                                     <label for="exampleInputPassword1"  className="form-label">Password</label>
                                     <input onChange={handleChange} type="password" name="password" className="form-control" id="exampleInputPassword1"/>
                                 </div>
                             </div>
-                        </div>
-                    </div>
                     <div className="text-center mt-3">
                         <button type="submit" className="btn btn-outline btn-md" onClick={switchMode} >Already have an account? Click here to Login</button>
                     </div>
@@ -130,6 +91,7 @@ const  GovernmentSign = () => {
                         <button type="submit" className="btn btn-primary btn-md">Register</button>
                     </div>
                 </form>
+                </div>
                 </>
                 :<>
                 <div className="container login">
@@ -157,4 +119,4 @@ const  GovernmentSign = () => {
         </div>
     )
 }
-export default GovernmentSign;
+export default CommitteeSign;

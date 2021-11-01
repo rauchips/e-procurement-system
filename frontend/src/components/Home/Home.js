@@ -1,6 +1,9 @@
+import Navbar from "../Navbar/Navbar";
 import "./Home.css"
 const Home = () => {
     return (
+        <>
+       <Navbar/>
         <div className="container-fluid home-fluid">
             <div className="container about">
                 <h5 className="text-center mb-3">Who we are</h5>
@@ -53,6 +56,7 @@ const Home = () => {
         </table>
         </div>
         </div>
+        </>
     )
 }
 export default Home;

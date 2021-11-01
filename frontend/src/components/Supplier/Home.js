@@ -1,8 +1,10 @@
+import SupplierNavbar from "./Navbar";
 
 
 const SupplierHome = () => {
     return (
         <div>
+            <SupplierNavbar/>
             <h5 className="mt-5 text-center mb-3">Welcome, John</h5>
             <div className="container mt-5">
             <table className="table table-bordered">
