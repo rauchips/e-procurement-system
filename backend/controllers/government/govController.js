@@ -65,7 +65,6 @@ exports.loginEntity = async (req, res, next) => {
     if(!matchPassword) return res.json({ message: 'Wrong Password' })
 
     return res.json({
-      message: 'Login Successful',
       data
     })
 

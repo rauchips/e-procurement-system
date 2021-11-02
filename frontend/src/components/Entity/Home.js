@@ -31,6 +31,7 @@ const EntityHome = () => {
                 <th scope="col">Closing Date</th>
                 <th scope="col">Status</th>
                 <th scope="col">Document</th>
+                <th scope="col">committee</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,17 +40,33 @@ const EntityHome = () => {
                 <td>Mark</td>
                 <td>Otto</td>
                 <td>@mdo</td>
+                <td>@mdo</td>
+                <td>@mdo</td>
+                <td>
+                    <button className='btn btn-outline-warning btn-md'>Add</button>
+                </td>
                 </tr>
                 <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>@mdo</td>
+                <td>@mdo</td>
+                <td>
+                    <button className='btn btn-outline-warning btn-md'>Add</button>
+                </td>
                 </tr>
                 <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>@mdo</td>
+                <td>@mdo</td>
+                <td>
+                    <button className='btn btn-outline-warning btn-md'>Add</button>
+                </td>
                 </tr>
             </tbody>
             </table>
