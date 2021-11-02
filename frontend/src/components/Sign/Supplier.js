@@ -29,6 +29,7 @@ const  SupplierSign = () => {
                 password:formData.password
             }
         }
+        console.log(post.representative)
         if (isSignUp) {
         fetch ("http://localhost:5000/api/vendor/register", {
             method:"POST",
@@ -53,8 +54,10 @@ const  SupplierSign = () => {
             headers:{
                 'Content-Type':'application/json'
             },
-            body:JSON.stringify (post)
+            body:JSON.stringify (post.representative)
+            
         })
+        
         .then(res => res.json())
         .then(json => {
             console.log("json",json)

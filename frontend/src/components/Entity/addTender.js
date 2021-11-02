@@ -8,7 +8,7 @@ import {useHistory,useLocation} from "react-router-dom"
 const AddTender = () => {
     const history = useHistory ();
     const location = useLocation ();
-    const initialState = {title:'',category:''}
+    const initialState = {title:'',category:'',document:""}
     const [startDate, setStartDate] = useState(new Date());
     const [formData, setFormData] = useState(initialState)
     const handleChange =(e) => {
@@ -19,6 +19,7 @@ const AddTender = () => {
         // const token =user?.token;
         setUser(JSON.parse(localStorage.getItem('entityprofile')))
     },[location])
+    console.log(formData)
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -64,7 +65,7 @@ const AddTender = () => {
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlFile1">Add a Document</label>
-                        <input type="file" className="form-control-file" id="exampleFormControlFile1"/>
+                        <input type="file" name='document' className="form-control-file" id="exampleFormControlFile1"/>
                     </div>
                 </div>
                 <div className="text-center mt-3">

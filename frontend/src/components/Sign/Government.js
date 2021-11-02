@@ -54,7 +54,7 @@ const  GovernmentSign = () => {
             headers:{
                 'Content-Type':'application/json'
             },
-            body:JSON.stringify (post)
+            body:JSON.stringify (post.representative)
         })
         .then(res => res.json())
         .then(json => {
