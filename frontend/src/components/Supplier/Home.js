@@ -1,11 +1,19 @@
+import React,{useEffect,useState} from "react";
 import SupplierNavbar from "./Navbar";
+import { useLocation } from "react-router-dom";
 
 
 const SupplierHome = () => {
+    const location = useLocation ();
+    const [user,setUser] = useState(JSON.parse(localStorage.getItem('vendorprofile')));
+    useEffect (() => {
+        // const token =user?.token;
+        setUser(JSON.parse(localStorage.getItem('vendorprofile')))
+    },[location])
     return (
         <div>
             <SupplierNavbar/>
-            <h5 className="mt-5 text-center mb-3">Welcome, John</h5>
+            <h5 className="mt-5 text-center mb-3">Welcome, {user.json.result.company} Company</h5>
             <div className="container mt-5">
             <table className="table table-bordered">
             <thead>

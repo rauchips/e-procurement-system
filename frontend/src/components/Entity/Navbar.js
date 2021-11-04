@@ -43,7 +43,7 @@ const EntityNavbar = () => {
                     </Link>
                 
                 </ul>
-                <h6 style={{marginRight:"40px"}}>Welcome, {user.json.data.representative.name}</h6>
+                <h6 style={{marginRight:"40px"}}>Welcome, {user.json.result.representative.name}</h6>
                 <button onClick={onClick} className='btn btn-danger btn-md'>
                     Logout
                 </button>

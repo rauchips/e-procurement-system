@@ -15,7 +15,7 @@ const EntityHome = () => {
     return (
         <div>
             <EntityNavbar/>
-            <h5 className="mt-5 text-center mb-3">Ministry of {user.json.entity}</h5>
+            <h5 className="mt-5 text-center mb-3">Ministry of {user.json.result.entity}</h5>
             <div className="container mt-4">
             <Link to="/government/add-tender">
             <button className="btn-outline-primary btn-lg">Create new Tender + </button>
@@ -43,7 +43,9 @@ const EntityHome = () => {
                 <td>@mdo</td>
                 <td>@mdo</td>
                 <td>
+                    <Link to="/government/committee-members">
                     <button className='btn btn-outline-warning btn-md'>Add</button>
+                    </Link>
                 </td>
                 </tr>
                 <tr>
