@@ -41,7 +41,7 @@ exports.postEntity = async (req, res, next) => {
     
     let newEntity = new Gov(req.body)
     newEntity.save()
-      .then((result) => res.status(201).json(result))
+      .then((result) => res.status(201).json({result}))
       .catch((err) => console.error(err))
 
   } catch (error) {
@@ -65,7 +65,7 @@ exports.loginEntity = async (req, res, next) => {
     if(!matchPassword) return res.json({ message: 'Wrong Password' })
 
     return res.json({
-      data
+      result:data
     })
 
   } catch (error) {

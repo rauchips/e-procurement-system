@@ -36,7 +36,7 @@ exports.postVendor = async (req, res, next) => {
     
     let newVendor = new Vendor(req.body)
     newVendor.save()
-      .then((result) => res.status(201).json(result))
+      .then((result) => res.status(201).json({result}))
       .catch((err) => console.error(err))
 
   } catch (error) {
@@ -60,7 +60,7 @@ exports.loginVendor = async (req, res, next) => {
     if(!matchPassword) return res.json({ message: 'Wrong Password' })
 
     return res.json({
-      data
+      result:data
     })
 
   } catch (error) {

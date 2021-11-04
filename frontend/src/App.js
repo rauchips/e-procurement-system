@@ -8,6 +8,7 @@ import SupplierHome from "./components/Supplier/Home";
 import AddTender from "./components/Entity/addTender";
 import CommitteeSign from "./components/committee/sign";
 import CommitteeHome from "./components/committee/home";
+import CommitteeMembers from "./components/Entity/CommitteeMembers";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path='/supplier/sign'  component={SupplierSign}/>
         <Route path='/supplier/home'  component={SupplierHome}/>
         <Route path='/government/add-tender'  component={AddTender}/>
+        <Route path='/government/committee-members'  component={CommitteeMembers}/>
         <Route path='/committee' exact  component={CommitteeSign}/>
         <Route path='/committee/home'  component={CommitteeHome}/>
       </Router>
