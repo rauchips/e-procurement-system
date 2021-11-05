@@ -6,18 +6,9 @@ const committeeSchema = mongoose.Schema( {
   telephone: String,
   email: String,
   password: String,
-  selected: {
-    type: Boolean,
-    default: false,
-  },
   createdAt: {
     type: Date,
     default: Date.now
-  },
-  tender: {
-    type:mongoose.Schema.Types.ObjectId,
-    default: null,
-    ref: 'tenders'
   }
 })
 

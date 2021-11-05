@@ -19,4 +19,11 @@ router.route('/register')
 router.route('/login')
   .post(comController.loginCommittee)
 
+/* 
+  GET TENDER BY ID SETUP
+*/
+
+router.route('/tender/:id')
+  .get(comController.getTender)
+
 module.exports = router;
