@@ -16,7 +16,11 @@ const tenderSchema = mongoose.Schema({
   rep: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'entities'
-  }
+  },
+  committee:[{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'committee'
+  }],
 })
 
 module.exports = mongoose.model('tenders', tenderSchema);
