@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 
 const Gov = require('../../models/government');
 const Tender = require('../../models/tender');
-const Committee = require('../../models/committee');
+const File = require('../../models/file');
 
 /* 
   REGISTER GOVERNMENT ENTITY 
@@ -102,6 +102,26 @@ exports.makeTender = async (req, res, next) => {
     newTender.save()
       .then((result) => res.status(201).json(result))
       .catch(err => console.error(err))
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+}
+
+/*
+  UPLOAD TENDER DOCUMENT BY ID
+*/
+
+exports.uploadTender = async (req, res, next) => {
+  try {
+
+    let file = await File.findOne({ 'entity': req.params.id })
+    if(file) return res.json({ message: 'A tender document already exists in the database' })
+
+    await File.create({ filename: req.file.filename, entity: req.params.id })
+      .then((result) => res.status(201).json(result))
+      .catch(err => console.error(err))
+
   } catch (error) {
     console.error(error);
     next(error);

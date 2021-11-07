@@ -1,4 +1,6 @@
 const express = require('express');
+
+const { upload } = require('../config/upload')
 const router = express.Router();
 
 const govController = require('../controllers/government/govController')
@@ -26,5 +28,12 @@ router.route('/login')
 router.route('/tender/:id')
   .get(govController.getTender)
   .post(govController.makeTender)
+
+/*
+  UPLOAD TENDER DOCUMENT BY ID
+*/
+
+router.route('/upload/:id')
+  .post(upload.single('tender'),govController.uploadTender)
 
 module.exports = router;
