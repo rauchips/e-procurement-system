@@ -48,14 +48,15 @@ const AddTender = () => {
         const date = startDate
 
         const post = {
-            date,
+            closingAt:date,
             committee:member,
             rep:user.json.result._id,
-            formData
+            title:formData.title
         }
+        console.log(member)
         console.log(post)
         axios.post(`http://localhost:5000/api/government/tender/${user.json.result._id}`,post)
-        .then(() => console.log("successful"))
+        .then((data) => console.log(data))
         // localStorage.removeItem("committeemembers")
         // history.push("/government/home")
     }

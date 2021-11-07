@@ -58,7 +58,7 @@ const  CommitteeSign = () => {
     }
     return (
         <div>
-            <div className="container sign">
+            <div className="container sign mt-5">
                 {isSignUp?
                 <h5 className="text-center mb-3">Committee Registration</h5>
                 :<h5 className="text-center mb-3">Committee Login</h5>}
@@ -77,7 +77,7 @@ const  CommitteeSign = () => {
                                 </div>
                                 <div className="mb-3">
                                     <label for="exampleInputEmail1"  className="form-label">Email</label>
-                                    <input onChange={handleChange} type="email" name="Email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+                                    <input onChange={handleChange} type="email" name="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
                                 </div>
                                 <div className="mb-3">
                                     <label for="exampleInputPassword1"  className="form-label">Password</label>
