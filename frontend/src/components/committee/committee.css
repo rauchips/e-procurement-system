@@ -1,0 +1,20 @@
+body {
+    background-color: rgb(15, 15, 15);
+    color: white;
+}
+.committee {
+    background-color: rgb(27, 26, 26);
+    color: white;
+    padding: 20px;
+    border-radius: 30px;
+}
+.committee h5 {
+    padding: 20px;
+}
+table {
+    color: white;
+}
+.card {
+    background-color: rgb(27, 26, 26);
+    color: white;
+}

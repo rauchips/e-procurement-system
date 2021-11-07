@@ -32,7 +32,7 @@ exports.postCommittee = async (req, res, next) => {
     
     let newCommittee = new Committee(req.body)
     newCommittee.save()
-      .then((result) => res.status(201).json(result))
+      .then((result) => res.status(201).json({result}))
       .catch((err) => console.error(err))
 
   } catch (error) {
@@ -56,7 +56,7 @@ exports.loginCommittee = async (req, res, next) => {
     if(!matchPassword) return res.json({ message: 'Wrong Password' })
 
     return res.json({
-      data
+      result:data
     })
 
   } catch (error) {
@@ -75,7 +75,7 @@ exports.getTender = async (req, res, next) => {
     let tender = await Tender.find({'committee': req.params.id , })
       .populate('rep', ['representative.name', 'representative.email'])
       .populate('committee', ['name', 'email'])
-    return res.json(tender)
+    return res.json({tender})
 
   } catch (error) {
     console.error(error);
