@@ -27,13 +27,13 @@ router.route('/login')
 
 router.route('/tender/:id')
   .get(govController.getTender)
-  .post(govController.makeTender)
+  .post(upload.single('tender'), govController.makeTender)
 
 /*
   UPLOAD TENDER DOCUMENT BY ID
 */
 
-router.route('/upload/:id')
-  .post(upload.single('tender'),govController.uploadTender)
+// router.route('/upload/:id')
+//   .post(upload.single('tender'),govController.uploadTender)
 
 module.exports = router;

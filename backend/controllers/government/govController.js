@@ -93,12 +93,21 @@ exports.getTender = async (req, res, next) => {
 exports.makeTender = async (req, res, next) => {
   try {
     let { title, category, description, closingAt, rep, committee } = req.body
-    if(req.params.id != String(req.body.rep)) return res.json({ message: 'This tender is not related to the named Entity' })
 
-    let tender = await Tender.findOne({ 'title': req.body.title })
-    if(tender) return res.json({ message: 'This tender already exists' })
+    // if(req.params.id != String(req.body.rep)) return res.json({ message: 'This tender is not related to the named Entity' })
 
-    let newTender = await new Tender(req.body)
+    // let tender = await Tender.findOne({ 'title': req.body.title })
+    // if(tender) return res.json({ message: 'This tender already exists' })
+
+    let newTender = await new Tender({
+      title: req.body.title, 
+      category: req.body.category, 
+      description: req.body.description, 
+      closingAt: req.body.closingAt, 
+      rep: req.params.id, 
+      committee: req.body.committee,
+      filename: req.file.filename 
+    })
     newTender.save()
       .then((result) => res.status(201).json(result))
       .catch(err => console.error(err))
@@ -112,18 +121,18 @@ exports.makeTender = async (req, res, next) => {
   UPLOAD TENDER DOCUMENT BY ID
 */
 
-exports.uploadTender = async (req, res, next) => {
-  try {
+// exports.uploadTender = async (req, res, next) => {
+//   try {
 
-    let file = await File.findOne({ 'entity': req.params.id })
-    if(file) return res.json({ message: 'A tender document already exists in the database' })
+//     let file = await File.findOne({ 'entity': req.params.id })
+//     if(file) return res.json({ message: 'A tender document already exists in the database' })
 
-    await File.create({ filename: req.file.filename, entity: req.params.id })
-      .then((result) => res.status(201).json(result))
-      .catch(err => console.error(err))
+//     await File.create({ filename: req.file.filename, entity: req.params.id })
+//       .then((result) => res.status(201).json(result))
+//       .catch(err => console.error(err))
 
-  } catch (error) {
-    console.error(error);
-    next(error);
-  }
-}
+//   } catch (error) {
+//     console.error(error);
+//     next(error);
+//   }
+// }
