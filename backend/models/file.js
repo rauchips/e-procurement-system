@@ -1,10 +1,7 @@
 const mongoose = require('mongoose');
 
 const fileSchema = mongoose.Schema({
-  filename: {
-    type: String,
-    required: true
-  },
+  filename: String,
   createdAt:{
     type: Date,
     default: Date.now

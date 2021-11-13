@@ -19,7 +19,7 @@ const tenderSchema = mongoose.Schema({
   },
   committee:[{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'committee'
+    ref: 'committees'
   }],
 })
 
