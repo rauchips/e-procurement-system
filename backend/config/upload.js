@@ -1,4 +1,5 @@
 const multer = require('multer');
+const { v4: uuidv4 } = require('uuid');
 
 // CONFIGURATION FOR MULTER
 
@@ -7,8 +8,8 @@ const multerStorage = multer.diskStorage({
     cb(null, '../dist/uploadTender')
   },
   filename: (req, file, cb) => {
-    const ext = file.mimetype.split('/')[1]
-    cb(null, `${ file.fieldname }-${ Date.now() }.${ ext }`)
+    const filename = file.originalname.toLowerCase()
+    cb(null, uuidv4() +`-${ filename }`)
   }
 })
 

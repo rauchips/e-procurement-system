@@ -18,4 +18,4 @@ committeeSchema.pre('save', async function(next) {
   next();
 });
 
-module.exports = mongoose.model('committee', committeeSchema);
+module.exports = mongoose.model('committees', committeeSchema);
