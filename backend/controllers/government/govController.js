@@ -82,7 +82,7 @@ exports.getTender = async (req, res, next) => {
   try {
     let tender = await Tender.find({'rep': req.params.id })
       .populate('rep', ['representative.name', 'representative.email'])
-      .populate('committee', ['name', 'email'])
+      .populate('committee', ['name', 'email', 'telephone'])
     return res.json(tender)
   } catch (error) {
     console.error(error);
@@ -94,22 +94,17 @@ exports.makeTender = async (req, res, next) => {
   try {
     let { title, category, description, closingAt, rep, committee } = req.body
 
-    // if(req.params.id != String(req.body.rep)) return res.json({ message: 'This tender is not related to the named Entity' })
+    if(req.params.id != String(req.body.rep)) return res.json({ message: 'This tender is not related to the named Entity' })
 
-    // let tender = await Tender.findOne({ 'title': req.body.title })
-    // if(tender) return res.json({ message: 'This tender already exists' })
+    await Tender.findOne({ 'title': req.body.title })
+      .then((tender) => {
+      if(tender) return res.json({ message: 'This tender already exists' });
 
-    let newTender = await new Tender({
-      title: req.body.title, 
-      category: req.body.category, 
-      description: req.body.description, 
-      closingAt: req.body.closingAt, 
-      rep: req.params.id, 
-      committee: req.body.committee,
-      filename: req.file.filename 
-    })
-    newTender.save()
-      .then((result) => res.status(201).json(result))
+      let newTender = new Tender(req.body)
+      newTender.save()
+        .then((result) => res.status(201).json(result))
+        .catch(err => console.error(err))
+      })
       .catch(err => console.error(err))
   } catch (error) {
     console.error(error);
@@ -121,18 +116,41 @@ exports.makeTender = async (req, res, next) => {
   UPLOAD TENDER DOCUMENT BY ID
 */
 
-// exports.uploadTender = async (req, res, next) => {
-//   try {
+exports.getUpload = async (req, res, next) => {
+  try {
 
-//     let file = await File.findOne({ 'entity': req.params.id })
-//     if(file) return res.json({ message: 'A tender document already exists in the database' })
+    File.find({'entity': req.params.id})
+      .populate('entity', ['representative.name', 'representative.email'])
+      .then((document) => {
+        if(req.params.id ===  String(document[0].entity._id)) return res.json(document)
+        return res.json({ message: 'This Entity has not uploaded any tender document' })
+      })
+      .catch((error) => console.error(error))
 
-//     await File.create({ filename: req.file.filename, entity: req.params.id })
-//       .then((result) => res.status(201).json(result))
-//       .catch(err => console.error(err))
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+}
 
-//   } catch (error) {
-//     console.error(error);
-//     next(error);
-//   }
-// }
+exports.uploadTender = async (req, res, next) => {
+  try {
+
+    await File.findOne({ 'entity': req.params.id })
+      .then((file) => {
+        if(file !== null) return res.json({ message: 'A tender document already exists in the database' })
+        
+        let newFile = new File({
+          filename: req.file.filename,
+          entity: req.params.id
+        })
+        newFile.save()
+          .then((result) => res.status(201).json(result))
+          .catch(err => console.error(err))
+      })
+      .catch(err => console.error(err))
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+}
