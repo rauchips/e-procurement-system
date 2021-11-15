@@ -34,7 +34,7 @@ const AddTender = () => {
         setFormData({...formData,[e.target.name]:e.target.value})
     }
     const handleFileChange =(e) => {
-        setSelectedFile({selectedFile:e.target.value})
+        setSelectedFile({selectedFile:e.target.files[0]})
     }        
     const [user,setUser] = useState(JSON.parse(localStorage.getItem('entityprofile')));
     useEffect (() => {
@@ -51,7 +51,8 @@ const AddTender = () => {
             closingAt:date,
             committee:member,
             rep:user.json.result._id,
-            title:formData.title
+            title:formData.title,
+            file:selectedFile
         }
         console.log(member)
         console.log(post)
@@ -60,6 +61,7 @@ const AddTender = () => {
         // localStorage.removeItem("committeemembers")
         // history.push("/government/home")
     }
+
     const onClick = async (id) => {
         var members = JSON.parse(localStorage.getItem("committeemembers"));
         if(members == null) members = [];
@@ -100,10 +102,7 @@ const AddTender = () => {
                             className="form-control date"
                         />
                     </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlFile1">Add a Document</label>
-                        <input type="file" onChange={handleFileChange} className="form-control-file" id="exampleFormControlFile1"/>
-                    </div>
+                   
                
                 </div>
                 </div>
@@ -136,11 +135,16 @@ const AddTender = () => {
             </div>
                 </div>
                 </div>
+                <div class="form-group">
+                        <label for="exampleFormControlFile1">Add a Document</label>
+                        <input type="file" onChange={handleFileChange} className="form-control-file" id="exampleFormControlFile1"/>
+                    </div>
+                   
                 <div className="text-center mt-3">
                     <button type="submit" className="btn btn-outline-success btn-md">Add</button>
                 </div>
             </form>
-            </div>
+         </div>   
         </div>
         </>
     )
