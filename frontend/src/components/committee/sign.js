@@ -59,6 +59,12 @@ const  CommitteeSign = () => {
     return (
         <div>
             <div className="container sign mt-5">
+            {errors?
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+         {errors}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+            :""}
                 {isSignUp?
                 <h5 className="text-center mb-3">Committee Registration</h5>
                 :<h5 className="text-center mb-3">Committee Login</h5>}

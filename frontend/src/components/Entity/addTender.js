@@ -52,7 +52,6 @@ const AddTender = () => {
             committee:member,
             rep:user.json.result._id,
             title:formData.title,
-            file:selectedFile
         }
         console.log(member)
         console.log(post)
@@ -69,6 +68,13 @@ const AddTender = () => {
         // Save allEntries back to local storage
        members.push(id);
         localStorage.setItem("committeemembers", JSON.stringify(members));
+    }
+    const onUpload = (e) => {
+        e.preventDefault ()
+        const formData = new FormData ()
+        formData.append('filename', selectedFile)
+        axios.post(`http://localhost:5000/api/government/upload/${user.json.result._id}`,formData)
+        .then((data) => console.log(data))
     }
     return (
         <>
@@ -135,13 +141,18 @@ const AddTender = () => {
             </div>
                 </div>
                 </div>
-                <div class="form-group">
-                        <label for="exampleFormControlFile1">Add a Document</label>
-                        <input type="file" onChange={handleFileChange} className="form-control-file" id="exampleFormControlFile1"/>
-                    </div>
-                   
                 <div className="text-center mt-3">
                     <button type="submit" className="btn btn-outline-success btn-md">Add</button>
+                </div>
+            </form>
+            <form onSubmit ={onUpload}>
+                <div class="form-group">
+                    <label for="exampleFormControlFile1">Add a Document</label>
+                    <input type="file" onChange={handleFileChange} className="form-control-file" id="exampleFormControlFile1"/>
+                </div>
+                   
+                <div className="mt-3">
+                    <button type="submit" className="btn btn-outline-success btn-md">Upload</button>
                 </div>
             </form>
          </div>   

@@ -4,13 +4,7 @@ import { useLocation } from 'react-router-dom';
 import "../Navbar/Navbar.css"
 
 const SupplierNavbar = () => {
-    const location = useLocation();
     const history = useHistory ();
-    const [user,setUser] = useState(JSON.parse(localStorage.getItem('vendorprofile')));
-    useEffect (() => {
-        // const token =user?.token;
-        setUser(JSON.parse(localStorage.getItem('vendorprofile')))
-    },[location])
 
     const onClick = () => {
         localStorage.clear()
@@ -18,7 +12,7 @@ const SupplierNavbar = () => {
     }
     return (
         <div className='container-fluid navbarpage'>
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
                 <a className="navbar-brand" href="/">Procurement System</a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,10 +32,12 @@ const SupplierNavbar = () => {
                     </Link>
                 
                 </ul>
-                <h6 style={{marginRight:"40px"}}>Welcome, {user.json.result.representative.name}</h6>
+                <div style={{marginRight:"80px"}}>
                 <button onClick={onClick} className='btn btn-danger btn-md'>
                     Logout
                 </button>
+                </div>
+               
                 </div>
             </div>
             </nav>

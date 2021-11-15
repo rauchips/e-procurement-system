@@ -1,10 +1,10 @@
 body {
-    background-color: rgb(15, 15, 15);
-    color: white;
+    background-color:  white;
+    color: black;
 }
 .committee {
-    background-color: rgb(27, 26, 26);
-    color: white;
+    background-color:  white;
+    color: black;
     padding: 20px;
     border-radius: 30px;
 }
@@ -12,9 +12,9 @@ body {
     padding: 20px;
 }
 table {
-    color: white;
+    color: black;
 }
 .card {
-    background-color: rgb(27, 26, 26);
-    color: white;
+    background-color:  white;
+    color: black;
 }
