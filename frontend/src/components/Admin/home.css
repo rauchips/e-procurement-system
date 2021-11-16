@@ -1,0 +1,22 @@
+.charts {
+    padding: 2opx;
+    margin-top: 4%;
+}
+.charts .count {
+    height:100px;
+    text-align: center;
+    padding: 20px;
+    border-width: 2px;
+    border-color: rgb(119, 196, 119);
+    color: rgb(3, 85, 85);
+    margin-bottom: 50px;
+}
+.charts .graph {
+    text-align: center;
+    padding: 20px;
+    border-width: 2px;
+    border-color: rgb(119, 196, 119);
+    color: rgb(3, 85, 85);
+    margin-bottom: 50px;
+    background-color: rgb(240, 240, 240);
+}

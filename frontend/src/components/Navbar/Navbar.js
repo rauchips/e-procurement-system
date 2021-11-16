@@ -48,10 +48,10 @@ const Navbar = () => {
                             Login
                         </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <Link to = "/government/sign">
+                    <Link to = "/government/login">
                     <button className='btn btn-primary btn-md m-2'>Entity</button>
                     </Link>
-                    <Link to = "/supplier/sign">
+                    <Link to = "/supplier/login">
                         <button className='btn btn-primary btn-md m-2'>Supplier</button>
                     </Link>
                     </ul>
