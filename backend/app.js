@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const governmentRouter = require('./routes/government');
 const vendorRouter = require('./routes/vendor');
 const committeeRouter = require('./routes/committee');
+const adminRouter = require('./routes/admin');
 
 const app = express();
 
@@ -27,5 +28,6 @@ app.use(cookieParser());
 app.use('/api/government', governmentRouter);
 app.use('/api/vendor', vendorRouter);
 app.use('/api/committee', committeeRouter);
+app.use('/api/admin', adminRouter);
 
 module.exports = app;
