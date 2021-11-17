@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 
 const Vendor = require('../../models/vendor');
 const Tender = require('../../models/tender');
+const Bid = require('../../models/bid');
 
 /* 
   REGISTER VENDOR 
@@ -77,11 +78,49 @@ exports.loginVendor = async (req, res, next) => {
 exports.getTender = async (req, res, next) => {
   try {
     await Tender.find()
-      .populate('vendor', ['name','email'])
+      .populate('rep', ['representative.name', 'representative.email'])
       .then((result) => res.json(result))
       .catch((error) => console.error(error))
 
     } catch (error) {
+    console.error(error);
+    next(error);
+  }
+}
+
+/* 
+  GET/MAKE BID BY ID SETUP
+*/
+
+exports.getBid = async (req, res, next) => {
+  try {
+    let bid = await Bid.find({'vendor': req.params.id })
+      .populate('tender', ['title', 'category', 'rep'])
+    return res.json(bid)
+
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+}
+
+exports.makeBid = async (req, res, next) => {
+  try {
+
+    if(req.params.id != String(req.body.vendor)) return res.json({ message: 'This bid is not related to the named Vendor' })
+
+    await Bid.findOne({ 'vendor': req.body.vendor })
+      .then((bid) => {
+      if(bid) return res.json({ message: 'This bid already exists' });
+
+      let newBid = new Bid(req.body)
+      newBid.save()
+        .then((result) => res.status(201).json(result))
+        .catch(err => console.error(err))
+      })
+      .catch(err => console.error(err))
+
+  } catch (error) {
     console.error(error);
     next(error);
   }
