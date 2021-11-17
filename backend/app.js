@@ -5,10 +5,10 @@ const logger = require('morgan');
 const cors = require("cors");
 const mongoose = require('mongoose');
 
+const adminRouter = require ("./routes/admin")
 const governmentRouter = require('./routes/government');
 const vendorRouter = require('./routes/vendor');
 const committeeRouter = require('./routes/committee');
-const adminRouter = require('./routes/admin');
 
 const app = express();
 
@@ -25,9 +25,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/api/admin', adminRouter);
 app.use('/api/government', governmentRouter);
 app.use('/api/vendor', vendorRouter);
 app.use('/api/committee', committeeRouter);
-app.use('/api/admin', adminRouter);
 
 module.exports = app;

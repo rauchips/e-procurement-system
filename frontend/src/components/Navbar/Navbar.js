@@ -1,8 +1,20 @@
-import React from 'react';
+import React,{useEffect,useState} from 'react';
 import { Link } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 import "./Navbar.css"
 
 const Navbar = () => {
+    const location = useLocation
+    const [entity,setEntity] = useState(JSON.parse(localStorage.getItem('entityprofile')));
+    useEffect (() => {
+        // const token =user?.token;
+        setEntity(JSON.parse(localStorage.getItem('entityprofile')))
+    },[location])
+    const [vendor,setVendor] = useState(JSON.parse(localStorage.getItem('vendorprofile')));
+    useEffect (() => {
+        // const token =user?.token;
+        setVendor(JSON.parse(localStorage.getItem('vendorprofile')))
+    },[location])
     return (
         <div className='container-fluid navbarpage'>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -23,13 +35,40 @@ const Navbar = () => {
                     <button className='btn btn-outline-primary nav-link btn-sm'>Tenders</button>
                     </li>
                     </Link>
-                    <li className="nav-item">
-                    <button className='btn btn-outline-primary nav-link btn-sm'>Suppliers</button>
-                    </li>
-                    <li className="nav-item">
-                    <button className='btn btn-outline-primary nav-link btn-sm'>Government Entities</button>
-                    </li>
-                
+                    {
+                        vendor?
+                        <>
+                            <Link to ="/supplier/home">
+                                <li className="nav-item">
+                                    <button className='btn btn-outline-primary nav-link btn-sm'>Suppliers</button>
+                                </li>
+                            </Link>
+                        </>:
+                        <>
+                            <Link to ='/supplier/login'>
+                                <li className="nav-item">
+                                    <button className='btn btn-outline-primary nav-link btn-sm'>Suppliers</button>
+                                </li>
+                            </Link>
+                        </>
+                    }
+                    {
+                        entity?
+                        <>
+                            <Link to ="government/home">
+                                <li className="nav-item">
+                                    <button className='btn btn-outline-primary nav-link btn-sm'>Government Entities</button>
+                                </li>
+                            </Link>
+                        </>:
+                        <>
+                            <Link to ='/government/login'>
+                                <li className="nav-item">
+                                    <button className='btn btn-outline-primary nav-link btn-sm'>Government Entities</button>
+                                </li>
+                            </Link>
+                        </>
+                    }
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Registration

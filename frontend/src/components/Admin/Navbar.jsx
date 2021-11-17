@@ -35,14 +35,19 @@ const AdminNavbar = () => {
                     <button className='btn btn-outline-primary nav-link btn-sm'>Entities</button>
                     </li>
                     </Link>
-                    <Link to = "/government/home">
+                    <Link to = '/admin/vendors'>
                     <li className="nav-item">
                     <button className='btn btn-outline-primary nav-link btn-sm'>Vendors</button>
                     </li>
                     </Link>
-                    <Link to = "/government/home">
+                    <Link to = '/admin/committee'>
                     <li className="nav-item">
                     <button className='btn btn-outline-primary nav-link btn-sm'>Committee</button>
+                    </li>
+                    </Link>
+                    <Link to = '/admin/tenders'>
+                    <li className="nav-item">
+                    <button className='btn btn-outline-primary nav-link btn-sm'>Tenders</button>
                     </li>
                     </Link>
                 

@@ -15,6 +15,9 @@ import SupplierLogin from "./components/login/Supplier"
 import AdminSign from "./components/Admin/Sign"
 import AdminHome from "./components/Admin/Home"
 import AdminEntities from "./components/Admin/Entities"
+import AdminVendors from './components/Admin/vendors';
+import AdminCommittee from './components/Admin/committee';
+import AdminTenders from './components/Admin/Tenders';
 
 
 const App = () => {
@@ -35,6 +38,9 @@ const App = () => {
         <Route path='/admin' exact component={AdminSign}/>
         <Route path='/admin/home'  component={AdminHome}/>
         <Route path='/admin/entities'  component={AdminEntities}/>
+        <Route path='/admin/vendors'  component={AdminVendors}/>
+        <Route path='/admin/committee'  component={AdminCommittee}/>
+        <Route path='/admin/tenders'  component={AdminTenders}/>
       </Router>
     </div>
   )

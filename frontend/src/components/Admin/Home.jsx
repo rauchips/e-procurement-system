@@ -1,10 +1,58 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react'
 import AdminNavbar from './Navbar'
 import "./home.css"
 import CountUp from 'react-countup';
 import {Bar,Pie,Line} from "react-chartjs-2"
 
 const AdminHome = () => {
+    const [tendersData,setTendersData] = useState ([])
+
+    useEffect (() => {
+        getTenderData ()
+    },[])
+
+    const getTenderData = async () => {
+        const response = await fetch ("http://localhost:5000/api/admin/tenders")
+        const result = await response.json ()
+        console.log(result)
+        setTendersData(result.count)
+    }
+    const [committeeData,setCommitteeData] = useState ([])
+
+    useEffect (() => {
+        getCommitteeData ()
+    },[])
+
+    const getCommitteeData = async () => {
+        const response = await fetch ("http://localhost:5000/api/admin/committees")
+        const result = await response.json ()
+        console.log(result)
+        setCommitteeData(result.count)
+    }
+    const [vendorData,setVendorData] = useState ([])
+
+    useEffect (() => {
+        getVendorData ()
+    },[])
+
+    const getVendorData = async () => {
+        const response = await fetch ("http://localhost:5000/api/admin/vendors")
+        const result = await response.json ()
+        console.log(result)
+        setVendorData(result.count)
+    }
+    const [entityData,setEntityData] = useState ([])
+
+    useEffect (() => {
+        getEntityData ()
+    },[])
+
+    const getEntityData = async () => {
+        const response = await fetch ("http://localhost:5000/api/admin/governments")
+        const result = await response.json ()
+        console.log(result)
+        setEntityData(result.count)
+    }
     return (
         <div>
            <AdminNavbar/>
@@ -16,7 +64,7 @@ const AdminHome = () => {
                         <h6>
                         <CountUp
                             start={0}
-                            end={20}
+                            end={entityData}
                             duration={2.75}
                             separator=" "
                             decimal=","
@@ -30,7 +78,7 @@ const AdminHome = () => {
                         <h6>
                         <CountUp
                             start={0}
-                            end={20}
+                            end={vendorData}
                             duration={2.75}
                             separator=" "
                             decimal=","
@@ -44,7 +92,7 @@ const AdminHome = () => {
                         <h6>
                         <CountUp
                             start={0}
-                            end={20}
+                            end={committeeData}
                             duration={2.75}
                             separator=" "
                             decimal=","
@@ -58,7 +106,7 @@ const AdminHome = () => {
                         <h6>
                         <CountUp
                             start={0}
-                            end={20}
+                            end={tendersData}
                             duration={2.75}
                             separator=" "
                             decimal=","
@@ -76,8 +124,8 @@ const AdminHome = () => {
                         data= {{
                             labels: ['Entities', 'vendors','committee','tenders'],
                             datasets: [{
-                                label: 'Number of customers and vendors',
-                                data: [50,20,40,10],
+                                label: 'Registered members and tenders',
+                                data: [entityData,vendorData,committeeData,tendersData],
                                 backgroundColor: [
                                     'rgba(255, 99, 132, 0.2)',
                                     'rgba(54, 162, 235, 0.2)',
@@ -117,8 +165,7 @@ const AdminHome = () => {
                     data= {{
                         labels: ['Entities', 'vendors','committee','tenders'],
                         datasets: [{
-                            label: 'Stock Remaining',
-                            data: [50,20,40,10],
+                            data: [entityData,vendorData,committeeData,tendersData],
                             backgroundColor: [
                                 'rgba(255, 99, 132, 0.2)',
                                 'rgba(54, 162, 235, 0.2)',
@@ -156,7 +203,7 @@ const AdminHome = () => {
                             datasets: [
                               {
                                 label: 'Registered members and tenders',
-                                data: [50,20,40,10],
+                                data: [entityData,vendorData,committeeData,tendersData],
                                 fill: false,
                                 backgroundColor: 'rgb(255, 99, 132)',
                                 borderColor: 'rgba(255, 99, 132, 0.2)',

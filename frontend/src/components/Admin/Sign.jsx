@@ -12,7 +12,7 @@ const AdminSign = () => {
     
     const onSubmit = (e) => {
         e.preventDefault()
-        fetch ("http://localhost:5000/api/committee/login", {
+        fetch ("http://localhost:5000/api/admin/login", {
             method:"POST",
             headers:{
                 'Content-Type':'application/json'
