@@ -19,12 +19,19 @@ router.route('/register')
 router.route('/login')
   .post(vendorController.loginVendor)
 
+/* 
+  GET TENDER BY ID SETUP
+*/
+
+router.route('/tender/:id')
+  .get(vendorController.getTender)
+
 // /* 
 //   GET/MAKE BID BY ID SETUP
 // */
 
-// router.route('/tender/:id')
-//   .get(vendorController.getBid)
+// router.route('/bid/:id')
+//   // .get(vendorController.getBid)
 //   .post(vendorController.makeBid)
 
 module.exports = router;

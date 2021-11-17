@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 
 const Vendor = require('../../models/vendor');
+const Tender = require('../../models/tender');
 
 /* 
   REGISTER VENDOR 
@@ -64,6 +65,23 @@ exports.loginVendor = async (req, res, next) => {
     })
 
   } catch (error) {
+    console.error(error);
+    next(error);
+  }
+}
+
+/*
+  GET TENDER BY ID SETUP
+*/
+
+exports.getTender = async (req, res, next) => {
+  try {
+    await Tender.find()
+      .populate('vendor', ['name','email'])
+      .then((result) => res.json(result))
+      .catch((error) => console.error(error))
+
+    } catch (error) {
     console.error(error);
     next(error);
   }
