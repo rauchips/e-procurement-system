@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 
 const Committee = require('../../models/committee');
 const Tender = require('../../models/tender');
+const Bid = require('../../models/bid');
 
 /* 
   REGISTER COMMITTEE MEMBER 
@@ -72,11 +73,27 @@ exports.loginCommittee = async (req, res, next) => {
 exports.getTender = async (req, res, next) => {
   try {
     
-    let tender = await Tender.find({'committee': req.params.id , })
+    let tender = await Tender.find({'committee': req.params.id })
       .populate('rep', ['representative.name', 'representative.email'])
       .populate('committee', ['name', 'email'])
     return res.json({tender})
 
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+}
+
+/* 
+  GET BID BY ID SETUP
+*/
+
+exports.getBid = async (req, res, next) => {
+  try {
+   
+    let bids = await Bid.find()
+      .populate('tender', ['title', 'category', 'description'])
+      return res.send(bids)
   } catch (error) {
     console.error(error);
     next(error);

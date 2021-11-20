@@ -26,4 +26,11 @@ router.route('/login')
 router.route('/tender/:id')
   .get(comController.getTender)
 
+/* 
+  GET BID BY ID SETUP
+*/
+
+router.route('/bid/:id')
+  .get(comController.getBid)
+
 module.exports = router;
