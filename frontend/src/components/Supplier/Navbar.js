@@ -10,6 +10,12 @@ const SupplierNavbar = () => {
         localStorage.clear()
         history.push("/")
     }
+    const location = useLocation ();
+    const [user,setUser] = useState(JSON.parse(localStorage.getItem('vendorprofile')));
+    useEffect (() => {
+        // const token =user?.token;
+        setUser(JSON.parse(localStorage.getItem('vendorprofile')))
+    },[location])
     return (
         <div className='container-fluid navbarpage'>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -20,23 +26,25 @@ const SupplierNavbar = () => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                    <Link to = "/">
+                    <Link to = '/supplier/home'>
                     <li className="nav-item">
-                        <button className='btn btn-secondary nav-link btn-sm'>Tenders</button>
+                        <button className='btn btn-secondary nav-link btn-sm'>Home</button>
                     </li>
                     </Link>
                     <Link to = "/government/home">
                     <li className="nav-item">
-                    <button className='btn btn-secondary nav-link btn-sm'>Accepted Tenders</button>
+                    <button className='btn btn-secondary nav-link btn-sm'>Bids made</button>
                     </li>
                     </Link>
                 
                 </ul>
-                <div style={{marginRight:"80px"}}>
+                <div  style={{marginRight:"80px",display:"flex"}}>
+                <h5 className="text-center text-white">Welcome, {user.json.result.representative.name}</h5>
+                
+                </div>
                 <button onClick={onClick} className='btn btn-danger btn-md'>
                     Logout
                 </button>
-                </div>
                
                 </div>
             </div>

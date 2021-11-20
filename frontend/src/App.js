@@ -18,6 +18,8 @@ import AdminEntities from "./components/Admin/Entities"
 import AdminVendors from './components/Admin/vendors';
 import AdminCommittee from './components/Admin/committee';
 import AdminTenders from './components/Admin/Tenders';
+import MakeBid from './components/Supplier/makeBid';
+import Tenders from './components/Home/Tenders';
 
 
 const App = () => {
@@ -25,12 +27,14 @@ const App = () => {
     <div>
       <Router>
         <Route path='/' exact component={Home}/>
+        <Route path='/tenders' exact component={Tenders}/>
         <Route path='/government/sign'  component={GovernmentSign}/>
         <Route path='/government/login'  component={GovernmentLogin}/>
         <Route path='/government/home' component={EntityHome}/>
         <Route path='/supplier/sign'  component={SupplierSign}/>
         <Route path='/supplier/login'  component={SupplierLogin}/>
         <Route path='/supplier/home'  component={SupplierHome}/>
+        <Route path='/supplier/bid'  component={MakeBid}/>
         <Route path='/government/add-tender'  component={AddTender}/>
         <Route path='/government/committee-members'  component={CommitteeMembers}/>
         <Route path='/committee' exact  component={CommitteeSign}/>
