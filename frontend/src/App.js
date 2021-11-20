@@ -18,6 +18,7 @@ import AdminEntities from "./components/Admin/Entities"
 import AdminVendors from './components/Admin/vendors';
 import AdminCommittee from './components/Admin/committee';
 import AdminTenders from './components/Admin/Tenders';
+import MakeBid from './components/Supplier/makeBid';
 
 
 const App = () => {
@@ -31,6 +32,7 @@ const App = () => {
         <Route path='/supplier/sign'  component={SupplierSign}/>
         <Route path='/supplier/login'  component={SupplierLogin}/>
         <Route path='/supplier/home'  component={SupplierHome}/>
+        <Route path='/supplier/bid'  component={MakeBid}/>
         <Route path='/government/add-tender'  component={AddTender}/>
         <Route path='/government/committee-members'  component={CommitteeMembers}/>
         <Route path='/committee' exact  component={CommitteeSign}/>
