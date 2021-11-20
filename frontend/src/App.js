@@ -19,6 +19,7 @@ import AdminVendors from './components/Admin/vendors';
 import AdminCommittee from './components/Admin/committee';
 import AdminTenders from './components/Admin/Tenders';
 import MakeBid from './components/Supplier/makeBid';
+import Tenders from './components/Home/Tenders';
 
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
     <div>
       <Router>
         <Route path='/' exact component={Home}/>
+        <Route path='/tenders' exact component={Tenders}/>
         <Route path='/government/sign'  component={GovernmentSign}/>
         <Route path='/government/login'  component={GovernmentLogin}/>
         <Route path='/government/home' component={EntityHome}/>
