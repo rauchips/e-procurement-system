@@ -101,35 +101,40 @@ exports.getEntity = async (req, res, next) => {
   }
 }
 
-// exports.patchEntity = async (req, res, next) => {
-//   try {
+exports.patchEntity = async (req, res, next) => {
+  try {
     
-//     await Gov.updateOne({ _id: req.params.id },req.body, { new: true })
-//       .then(result => {
-//         if(String(result._id) !== req.params.id) return res.json({ message: 'Entity does not exist' })
-//         return res.status(200).json(result)
-//       })
-//       .catch(err => res.json(err))
+    await Gov.updateOne({ _id: req.params.id },{ $set: {
+      'represenative.name': req.body.representative.name,
+      'represenative.email': req.body.representative.email,
+      'entity': req.body.entity
+    } })
+      .then(result => {
+        if(!result) return res.json({ message: 'Entity does not exist' })
+        return res.status(200).json(result)
+      })
+      .catch(err => res.json(err))
 
-//   } catch (error) {
-//     console.error(error);
-//     next(error);
-//   }
-// }
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+}
 
-// exports.deleteEntity = async (req, res, next) => {
-//   try {
+exports.deleteEntity = async (req, res, next) => {
+  try {
     
-//     await Gov.deleteOne({ '_id': req.params.id } , { new: true })
-//       .then((result) => {
-//         return res.status(200).json(result)
-//       })
+    await Gov.deleteOne({ _id: req.params.id })
+      .then((result) => {
+        if(!result) return res.json({ message: 'Government Entity does not exist' })
+        return res.status(200).json({ message: 'Government Entity has been deleted' })
+      })
 
-//   } catch (error) {
-//     console.error(error);
-//     next(error);
-//   }
-// }
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+}
 
 
 
@@ -167,6 +172,41 @@ exports.getVendor = async (req, res, next) => {
       })
       .catch(error => console.error(error))
     
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+}
+
+exports.patchVendor = async (req, res, next) => {
+  try {
+    
+    await Vendor.updateOne({ _id: req.params.id },{ $set: {
+      'represenative.name': req.body.representative.name,
+      'represenative.email': req.body.representative.email,
+      'company': req.body.company
+    } })
+      .then(result => {
+        if(!result) return res.json({ message: 'Vendor does not exist' })
+        return res.status(200).json(result)
+      })
+      .catch(err => res.json(err))
+
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+}
+
+exports.deleteVendor = async (req, res, next) => {
+  try {
+    
+    await Vendor.deleteOne({ _id: req.params.id })
+      .then((result) => {
+        if(!result) return res.json({ message: 'Vendor does not exist' })
+        return res.status(200).json({ message: 'Vendor has been deleted' })
+      })
+
   } catch (error) {
     console.error(error);
     next(error);
@@ -218,8 +258,6 @@ exports.getTender = async (req, res, next) => {
   }
 }
 
-
-
 /*
   COMMITTEE SETUP
 */
@@ -254,6 +292,40 @@ exports.getCommittee = async (req, res, next) => {
       })
       .catch(error => console.error(error))
     
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+}
+
+exports.patchCommittee = async (req, res, next) => {
+  try {
+    
+    await Committee.updateOne({ _id: req.params.id },{ $set: {
+      'name': req.body.name,
+      'email': req.body.email
+    } })
+      .then(result => {
+        if(!result) return res.json({ message: 'Committee does not exist' })
+        return res.status(200).json(result)
+      })
+      .catch(err => res.json(err))
+
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+}
+
+exports.deleteCommittee = async (req, res, next) => {
+  try {
+    
+    await Committee.deleteOne({ _id: req.params.id })
+      .then((result) => {
+        if(!result) return res.json({ message: 'Committee does not exist' })
+        return res.status(200).json({ message: 'Committee has been deleted' })
+      })
+
   } catch (error) {
     console.error(error);
     next(error);

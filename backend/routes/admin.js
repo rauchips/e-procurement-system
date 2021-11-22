@@ -31,8 +31,8 @@ router.route('/governments')
 
 router.route('/governments/:id')
   .get(adminController.getEntity)
-  // .patch(adminController.patchEntity)
-  // .delete(adminController.deleteEntity)
+  .patch(adminController.patchEntity)
+  .delete(adminController.deleteEntity)
 
 /*
   VENDOR SETUP
@@ -47,6 +47,8 @@ router.route('/vendors')
 
 router.route('/vendors/:id')
   .get(adminController.getVendor)
+  .patch(adminController.patchVendor)
+  .delete(adminController.deleteVendor)
 
 /*
   TENDOR SETUP
@@ -75,5 +77,7 @@ router.route('/committees')
 
 router.route('/committees/:id')
   .get(adminController.getCommittee)
+  .patch(adminController.patchCommittee)
+  .delete(adminController.deleteCommittee)
 
 module.exports = router;
