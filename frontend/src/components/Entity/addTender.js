@@ -37,6 +37,7 @@ const AddTender = () => {
         setSelectedFile({selectedFile:e.target.files[0]})
     }        
     const [user,setUser] = useState(JSON.parse(localStorage.getItem('entityprofile')));
+    console.log(member)
     useEffect (() => {
         // const token =user?.token;
         setUser(JSON.parse(localStorage.getItem('entityprofile')))
@@ -48,8 +49,8 @@ const AddTender = () => {
         const date = startDate
 
         const post = {
-            closingAt:date,
             committee:member,
+            closingAt:date,
             rep:user.json.result._id,
             title:formData.title,
         }
@@ -57,8 +58,10 @@ const AddTender = () => {
         console.log(post)
         axios.post(`http://localhost:5000/api/government/tender/${user.json.result._id}`,post)
         .then((data) => console.log(data))
-        // localStorage.removeItem("committeemembers")
-        // history.push("/government/home")
+        alert ("Make this tender")
+        history.push("/government/home")
+        localStorage.removeItem("committeemembers")
+
     }
 
     const onClick = async (id) => {
@@ -81,10 +84,11 @@ const AddTender = () => {
         <EntityNavbar/>
         <div className='container sign'>
             <div className='card'>
-            <form onSubmit={onSubmit}>
+            
                 <div className="row padding">
                     
                     <div className="col-md-12 col-sm-12 col-lg-6">
+                    <form onSubmit={onSubmit}>
                     <div className="card">
                     <h5 className='text-center mb-3'>Add Tender</h5>
                     <div className="mb-3">
@@ -111,6 +115,10 @@ const AddTender = () => {
                    
                
                 </div>
+                <div className="text-center mt-3">
+                    <button type="submit" className="btn btn-outline-success btn-md">Add</button>
+                </div>
+            </form>
                 </div>
                 <div className="col-lg-6">
                 <div className="card">
@@ -129,7 +137,7 @@ const AddTender = () => {
                                     <tr>
                                     <td >{member.name}</td>
                                     <td className="text-center">
-                                        <button className='btn btn-outline-primary btn-md' onClick={(() =>onClick(member._id))} >Add</button>
+                                        <button className='btn btn-outline-primary btn-md' onClick={(() => onClick(member._id))} >Add</button>
                                     </td>
                                     </tr>
                                     
@@ -140,11 +148,9 @@ const AddTender = () => {
                              </table>
             </div>
                 </div>
+               
                 </div>
-                <div className="text-center mt-3">
-                    <button type="submit" className="btn btn-outline-success btn-md">Add</button>
-                </div>
-            </form>
+               
             <form onSubmit ={onUpload}>
                 <div class="form-group">
                     <label for="exampleFormControlFile1">Add a Document</label>
@@ -155,6 +161,7 @@ const AddTender = () => {
                     <button type="submit" className="btn btn-outline-success btn-md">Upload</button>
                 </div>
             </form>
+           
          </div>   
         </div>
         </>

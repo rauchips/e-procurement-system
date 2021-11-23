@@ -1,7 +1,9 @@
 import React,{ useState,useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import AdminNavbar from './Navbar'
-
+import axios from 'axios'
 const AdminEntities = () => {
+    const history = useHistory ()
     const [entityData,setEntityData] = useState ([])
 
     useEffect (() => {
@@ -13,6 +15,18 @@ const AdminEntities = () => {
         const result = await response.json ()
         console.log(result)
         setEntityData(result.body)
+    }
+    const onDelete = (id) => {
+        axios.delete( `http://localhost:5000/api/admin/governments/${id}`)
+        alert("Confirm deletion of this account")
+        history.go(0)
+    }
+    const onUpdate = (id,entity,name,email) => {
+        localStorage.setItem("adminentityid",JSON.stringify({id}))
+        localStorage.setItem("adminentity",JSON.stringify({entity}))
+        localStorage.setItem("adminentityname",JSON.stringify({name}))
+        localStorage.setItem("adminentityemail",JSON.stringify({email}))
+        history.push('/admin/update-entity')
     }
     return (
         <div>
@@ -46,10 +60,10 @@ const AdminEntities = () => {
                 <td>
                     <div style={{display:"flex"}}>
                     <div className="m-2">
-                        <div className="btn btn-md btn-outline-info">Update</div>
+                        <div className="btn btn-md btn-outline-info" onClick = {(() => onUpdate (entity._id,entity.entity,entity.representative.name,entity.representative.email))}>Update</div>
                     </div>
                     <div className="m-2">
-                        <div className="btn btn-md btn-outline-danger">Delete</div>
+                        <div className="btn btn-md btn-outline-danger"  onClick ={(() => onDelete (entity._id))}  >Delete</div>
                     </div>
                     </div>
                     

@@ -1,7 +1,10 @@
 import React,{ useState,useEffect } from 'react'
 import AdminNavbar from './Navbar'
+import axios from 'axios'
+import { useHistory } from 'react-router-dom'
 
 const AdminVendors = () => {
+    const history = useHistory()
     const [vendorData,setVendorData] = useState ([])
 
     useEffect (() => {
@@ -14,6 +17,18 @@ const AdminVendors = () => {
         console.log(result)
         setVendorData(result.body)
     }
+    const onDelete = (id) => {
+        axios.delete( `http://localhost:5000/api/admin/vendors/${id}`)
+        alert("Confirm deletion of this account")
+        history.go(0)
+    }
+    const onUpdate = (id,company,name,email) => {
+        localStorage.setItem("adminvendorid",JSON.stringify({id}))
+        localStorage.setItem("adminvendor",JSON.stringify({company}))
+        localStorage.setItem("adminvendorname",JSON.stringify({name}))
+        localStorage.setItem("adminvendoremail",JSON.stringify({email}))
+        history.push('/admin/update-vendor')
+    }
     return (
         <div>
             <AdminNavbar/>
@@ -22,7 +37,7 @@ const AdminVendors = () => {
             <table class="table table-dark">
             <thead>
                 <tr>
-                <th scope="col">Entity</th>
+                <th scope="col">Company</th>
                 <th scope="col">Telephone</th>
                 <th scope="col">Address</th>
                 <th scope="col">Rep Name</th>
@@ -42,10 +57,10 @@ const AdminVendors = () => {
                 <td>
                     <div style={{display:"flex"}}>
                     <div className="m-2">
-                        <div className="btn btn-md btn-outline-info">Update</div>
+                        <div className="btn btn-md btn-outline-info" onClick={(() => onUpdate(vendor._id,vendor.company,vendor.representative.name,vendor.representative.email))}>Update</div>
                     </div>
                     <div className="m-2">
-                        <div className="btn btn-md btn-outline-danger">Delete</div>
+                        <div className="btn btn-md btn-outline-danger" onClick={(() => onDelete(vendor._id))}>Delete</div>
                     </div>
                     </div>
                     
