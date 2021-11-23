@@ -105,8 +105,8 @@ exports.patchEntity = async (req, res, next) => {
   try {
     
     await Gov.updateOne({ _id: req.params.id },{ $set: {
-      'represenative.name': req.body.representative.name,
-      'represenative.email': req.body.representative.email,
+      'representative.name': req.body.representative.name,
+      'representative.email': req.body.representative.email,
       'entity': req.body.entity
     } })
       .then(result => {
@@ -114,7 +114,7 @@ exports.patchEntity = async (req, res, next) => {
         return res.status(200).json(result)
       })
       .catch(err => res.json(err))
-
+      console.log(req.body.representative.name);
   } catch (error) {
     console.error(error);
     next(error);
@@ -182,8 +182,8 @@ exports.patchVendor = async (req, res, next) => {
   try {
     
     await Vendor.updateOne({ _id: req.params.id },{ $set: {
-      'represenative.name': req.body.representative.name,
-      'represenative.email': req.body.representative.email,
+      'representative.name': req.body.representative.name,
+      'representative.email': req.body.representative.email,
       'company': req.body.company
     } })
       .then(result => {
