@@ -20,6 +20,9 @@ import AdminCommittee from './components/Admin/committee';
 import AdminTenders from './components/Admin/Tenders';
 import MakeBid from './components/Supplier/makeBid';
 import Tenders from './components/Home/Tenders';
+import UpdateEntity from './components/Admin/updateEntity';
+import UpdateVendor from './components/Admin/updateVendor';
+import UpdateCommittee from './components/Admin/updateCommittee';
 
 
 const App = () => {
@@ -45,6 +48,9 @@ const App = () => {
         <Route path='/admin/vendors'  component={AdminVendors}/>
         <Route path='/admin/committee'  component={AdminCommittee}/>
         <Route path='/admin/tenders'  component={AdminTenders}/>
+        <Route path='/admin/update-entity'  component={UpdateEntity}/>
+        <Route path='/admin/update-vendor'  component={UpdateVendor}/>
+        <Route path='/admin/update-committee'  component={UpdateCommittee}/>
       </Router>
     </div>
   )

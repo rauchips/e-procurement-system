@@ -1,7 +1,10 @@
 import React,{ useState,useEffect } from 'react'
 import AdminNavbar from './Navbar'
+import axios from 'axios'
+import { useHistory } from 'react-router-dom'
 
 const AdminCommittee = () => {
+    const history = useHistory()
     const [committeeData,setCommitteeData] = useState ([])
 
     useEffect (() => {
@@ -13,6 +16,17 @@ const AdminCommittee = () => {
         const result = await response.json ()
         console.log(result)
         setCommitteeData(result.body)
+    }
+    const onDelete = (id) => {
+        axios.delete( `http://localhost:5000/api/admin/committees/${id}`)
+        alert("Confirm deletion of this account")
+        history.go(0)
+    }
+    const onUpdate = (id,name,email) => {
+        localStorage.setItem("admincommitteeid",JSON.stringify({id}))
+        localStorage.setItem("admincommitteename",JSON.stringify({name}))
+        localStorage.setItem("admincommitteeemail",JSON.stringify({email}))
+        history.push('/admin/update-committee')
     }
     return (
         <div>
@@ -40,10 +54,10 @@ const AdminCommittee = () => {
                 <td>
                     <div style={{display:"flex"}}>
                     <div className="m-2">
-                        <div className="btn btn-md btn-outline-info">Update</div>
+                        <div className="btn btn-md btn-outline-info" onClick={(() => onUpdate (committee._id,committee.name,committee.email))}>Update</div>
                     </div>
                     <div className="m-2">
-                        <div className="btn btn-md btn-outline-danger">Delete</div>
+                        <div className="btn btn-md btn-outline-danger" onClick={(() => onDelete(committee._id))} >Delete</div>
                     </div>
                     </div>
                     
