@@ -122,8 +122,8 @@ exports.getUpload = async (req, res, next) => {
     File.find({'entity': req.params.id})
       .populate('entity', ['representative.name', 'representative.email'])
       .then((document) => {
-        if(req.params.id ===  String(document[0].entity._id)) return res.json(document)
-        return res.json({ message: 'This Entity has not uploaded any tender document' })
+        return res.json(document)
+        // return res.json({ message: 'This Entity has not uploaded any tender document' })
       })
       .catch((error) => console.error(error))
 
