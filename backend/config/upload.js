@@ -1,5 +1,4 @@
 const multer = require('multer');
-const { v4: uuidv4 } = require('uuid');
 
 // CONFIGURATION FOR MULTER
 
@@ -9,7 +8,7 @@ const multerStorage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     const filename = file.originalname.toLowerCase()
-    cb(null, uuidv4() +`-${ filename }`)
+    cb(null, filename)
   }
 })
 
