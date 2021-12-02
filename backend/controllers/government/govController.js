@@ -75,7 +75,7 @@ exports.loginEntity = async (req, res, next) => {
 }
 
 /* 
-  GET/MAKE TENDER BY ID SETUP
+  GET || MAKE || CLOSE AND TENDER BY ID SETUP
 */
 
 exports.getTender = async (req, res, next) => {
@@ -112,6 +112,22 @@ exports.makeTender = async (req, res, next) => {
   }
 }
 
+// exports.closeTender = async (req, res, next) => {
+//   try {
+
+//     await Tender.updateOne({ donor: null, verification: true },{ $set: { donor: req.params.id } }, { new: true, multi:true })
+//       .then(result => {
+//         if(!result) return res.json({ message: 'Dontion Request does not exist' })
+//         return res.status(200).json(result)
+//       })
+//       .catch(err => res.json(err))
+      
+//   } catch (error) {
+//     console.error(error);
+//     next(error);
+//   }
+// }
+
 /*
   UPLOAD TENDER DOCUMENT BY ID
 */
@@ -119,11 +135,10 @@ exports.makeTender = async (req, res, next) => {
 exports.getUpload = async (req, res, next) => {
   try {
 
-    File.find({'entity': req.params.id})
-      .populate('entity', ['representative.name', 'representative.email'])
+    File.find({'tender': req.params.id})
+      .populate('tender', ['title', 'category', 'description'])
       .then((document) => {
         return res.json(document)
-        // return res.json({ message: 'This Entity has not uploaded any tender document' })
       })
       .catch((error) => console.error(error))
 
@@ -136,13 +151,13 @@ exports.getUpload = async (req, res, next) => {
 exports.uploadTender = async (req, res, next) => {
   try {
 
-    await File.findOne({ 'entity': req.params.id })
+    await File.findOne({ 'tender': req.params.id })
       .then((file) => {
         if(file !== null) return res.json({ message: 'A tender document already exists in the database' })
         
         let newFile = new File({
           filename: req.file.filename,
-          entity: req.params.id
+          tender: req.params.id
         })
         newFile.save()
           .then((result) => res.status(201).json(result))

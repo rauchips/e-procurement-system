@@ -85,15 +85,31 @@ exports.getTender = async (req, res, next) => {
 }
 
 /* 
-  GET BID BY ID SETUP
+  GET AND APPROVE BID BY ID SETUP
 */
 
 exports.getBid = async (req, res, next) => {
   try {
    
     let bids = await Bid.find()
-      .populate('tender', ['title', 'category', 'description'])
-      return res.send(bids)
+    .populate('vendor', ['company', 'representative.name', 'representative.email'])
+    return res.send(bids)
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+}
+
+exports.approveBid = async (req, res, next) => {
+  try {
+    
+    await Bid.updateOne({ status: false },{ $set: { status: true } })
+      .then(result => {
+        if(!result) return res.json({ message: 'This bid request does not exist' })
+        return res.status(200).json(result)
+      })
+      .catch(err => res.json(err))
+
   } catch (error) {
     console.error(error);
     next(error);

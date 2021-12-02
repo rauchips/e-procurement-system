@@ -1,9 +1,9 @@
 const express = require('express');
-
-const { upload } = require('../config/upload');
 const router = express.Router();
 
-const govController = require('../controllers/government/govController')
+const { upload } = require('../config/upload');
+
+const govController = require('../controllers/government/govController');
 
 
 /* 
@@ -22,12 +22,13 @@ router.route('/login')
   .post(govController.loginEntity)
 
 /* 
-  GET/MAKE TENDER BY ID SETUP
+  GET AND MAKE TENDER BY ID SETUP
 */
 
 router.route('/tender/:id')
   .get(govController.getTender)
   .post(govController.makeTender)
+  // .patch(govController.closeTender)
 
 /*
   UPLOAD TENDER DOCUMENT BY ID

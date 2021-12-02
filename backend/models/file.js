@@ -6,9 +6,9 @@ const fileSchema = mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  entity: {
+  tender: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'entities'
+    ref: 'tenders'
   },
 })
 
