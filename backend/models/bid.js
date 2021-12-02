@@ -1,14 +1,10 @@
 const mongoose = require('mongoose');
 
 const bidSchema = mongoose.Schema({
-  document: String,
+  filename: String,
   status: {
     type: Boolean,
     default: false
-  },
-  tender:{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'tenders'
   },
   vendor:{
     type: mongoose.Schema.Types.ObjectId,

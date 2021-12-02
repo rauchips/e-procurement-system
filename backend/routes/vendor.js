@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const { bid } = require('../config/bid');
+
 const vendorController = require('../controllers/vendor/vendorController')
 
 
@@ -27,11 +29,18 @@ router.route('/tender')
   .get(vendorController.getTender)
 
 /* 
-  GET/MAKE BID BY ID SETUP
+  GET AND MAKE BID BY ID SETUP
 */
 
 router.route('/bid/:id')
   .get(vendorController.getBid)
-  .post(vendorController.makeBid)
+  .post(bid.single('bid'),vendorController.makeBid)
+
+/* 
+  GET APPROVED BID BY ID SETUP
+*/
+
+router.route('/approved/:id')
+  .get(vendorController.approvedBid)
 
 module.exports = router;

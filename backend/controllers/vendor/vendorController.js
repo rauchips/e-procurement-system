@@ -89,13 +89,13 @@ exports.getTender = async (req, res, next) => {
 }
 
 /* 
-  GET/MAKE BID BY ID SETUP
+  GET AND MAKE BID BY ID SETUP
 */
 
 exports.getBid = async (req, res, next) => {
   try {
     let bid = await Bid.find({'vendor': req.params.id })
-      .populate('tender', ['title', 'category', 'rep'])
+      .populate('vendor', ['company', 'representative.name', 'representative.email'])
     return res.json(bid)
 
   } catch (error) {
@@ -107,16 +107,17 @@ exports.getBid = async (req, res, next) => {
 exports.makeBid = async (req, res, next) => {
   try {
 
-    if(req.params.id != String(req.body.vendor)) return res.json({ message: 'This bid is not related to the named Vendor' })
-
-    await Bid.findOne({ 'vendor': req.body.vendor })
+    await Bid.findOne({ 'vendor': req.params.id })
       .then((bid) => {
-      if(bid) return res.json({ message: 'This bid already exists' });
-
-      let newBid = new Bid(req.body)
-      newBid.save()
-        .then((result) => res.status(201).json(result))
-        .catch(err => console.error(err))
+        if(bid !== null) return res.json({ message: 'A bid for this tender already exists in the database' })
+        
+        let newFile = new Bid({
+          filename: req.file.filename,
+          vendor: req.params.id
+        })
+        newFile.save()
+          .then((result) => res.status(201).json(result))
+          .catch(err => console.error(err))
       })
       .catch(err => console.error(err))
 
@@ -126,35 +127,18 @@ exports.makeBid = async (req, res, next) => {
   }
 }
 
-// /* 
-//   GET/MAKE TENDER BY ID SETUP
-// */
+/* 
+  GET APPROVED BID BY ID SETUP
+*/
 
-// exports.getTender = async (req, res, next) => {
-//   try {
-//     let tender = await Tender.find({'rep': req.params.id })
-//       .populate('rep', ['representative.name', 'representative.email'])
-//     return res.json(tender)
-//   } catch (error) {
-//     console.error(error);
-//     next(error);
-//   }
-// }
+exports.approvedBid = async (req, res, next) => {
+  try {
+    let bid = await Bid.find({ _id: req.params.id, status: true })
+      .populate('vendor', ['company', 'representative.name', 'representative.email'])
+    return res.json(bid)
 
-// exports.makeTender = async (req, res, next) => {
-//   try {
-//     let { title, category, description, closingAt, rep } = req.body
-//     if(req.params.id != String(req.body.rep)) return res.json({ message: 'This tender is not related to the named Entity' })
-
-//     let tender = await Tender.findOne({ 'title': req.body.title })
-//     if(tender) return res.json({ message: 'This tender already exists' })
-
-//     let newTender = await new Tender(req.body)
-//     newTender.save()
-//       .then((result) => res.status(201).json(result))
-//       .catch(err => console.error(err))
-//   } catch (error) {
-//     console.error(error);
-//     next(error);
-//   }
-// }
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+}
