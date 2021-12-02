@@ -91,7 +91,7 @@ exports.getTender = async (req, res, next) => {
 exports.getBid = async (req, res, next) => {
   try {
    
-    let bids = await Bid.find()
+    let bids = await Bid.find({ _id: req.params.id })
     .populate('vendor', ['company', 'representative.name', 'representative.email'])
     return res.send(bids)
   } catch (error) {
