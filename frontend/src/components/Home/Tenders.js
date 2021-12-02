@@ -24,8 +24,8 @@ const Tenders = () => {
             <thead>
                 <tr>
                 <th scope="col">Title</th>
-                <th scope="col">Representative Name</th>
-                <th scope="col">Representative Email</th>
+                {/* <th scope="col">Representative Name</th>
+                <th scope="col">Representative Email</th> */}
                 <th scope="col">Status</th>
                 <th scope="col">Document</th>
                 </tr>
@@ -35,8 +35,8 @@ const Tenders = () => {
                     <tbody>
                 <tr>
                 <td>{tender.title}</td>
-                <td>{tender.rep.representative.name}</td>
-                <td>{tender.rep.representative.email}</td>
+                {/* <td>{tender.rep.representative.name}</td>
+                <td>{tender.rep.representative.email}</td> */}
                 {
                     tender.status === false?<td>Active</td>:<td>Inactive</td>
                 }

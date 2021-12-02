@@ -12,6 +12,31 @@ const EntityHome = () => {
         setUser(JSON.parse(localStorage.getItem('entityprofile')))
     },[location])
 
+    const [data,setData] = useState ([]);
+    const [documentData,setDocumentData] = useState ([]);
+    useEffect (() => {
+        getData ()
+    },[])
+
+    const getData = async () => {
+        try {
+            const response = await fetch (`http://localhost:5000/api/government/tender/${user.json.result._id}`)
+            const result = await response.json ()
+            setData(result)
+            console.log (result)
+        } catch (error) {
+            console.log(error)
+        }
+        try {
+            const response = await fetch (`http://localhost:5000/api/government/upload/${user.json.result._id}`)
+            const result = await response.json ()
+            setDocumentData(result)
+            console.log (result)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <div>
             <EntityNavbar/>
@@ -27,50 +52,35 @@ const EntityHome = () => {
             <thead>
                 <tr>
                 <th scope="col">Tender Id</th>
-                <th scope="col">Tender Description</th>
+                <th scope="col">Tender Title</th>
                 <th scope="col">Date of Publication</th>
                 <th scope="col">Closing Date</th>
                 <th scope="col">Status</th>
                 <th scope="col">Document</th>
-                <th scope="col">committee</th>
                 </tr>
             </thead>
+            {
+                data.map (tender => (
+                    <>
+                    <td>{tender._id} </td>
+                    <td>{tender.title} </td>
+                    <td>{tender.createdAt}</td>
+                    <td>{tender.closingAt} </td>
+                    {tender.status === true? <td>True</td>:<td>False</td> }
+
+                    </>
+                ) )
+            }
+            {
+                documentData.map(document => (
+                    <td>
+                        {document.filename}
+                        <a href= {`../../../public/uploads/${document.filename}`} download><i className='fa fa-download'></i></a>
+                    </td>
+                ))
+            }
+
             <tbody>
-                <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td>
-                    <Link to="/government/committee-members">
-                    <button className='btn btn-outline-warning btn-md'>Add</button>
-                    </Link>
-                </td>
-                </tr>
-                <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td>
-                    <button className='btn btn-outline-warning btn-md'>Add</button>
-                </td>
-                </tr>
-                <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td>
-                    <button className='btn btn-outline-warning btn-md'>Add</button>
-                </td>
-                </tr>
             </tbody>
             </table>
             </div>
