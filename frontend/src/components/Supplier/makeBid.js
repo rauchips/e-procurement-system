@@ -6,6 +6,7 @@ import axios from 'axios'
 const MakeBid = () => {
     const history = useHistory()
     const location = useLocation ();
+    const [selectedFile,setSelectedFile] = useState("");
     const [user,setUser] = useState(JSON.parse(localStorage.getItem('vendorprofile')));
     useEffect (() => {
         // const token =user?.token;
@@ -22,16 +23,13 @@ const MakeBid = () => {
         setTenderName(JSON.parse(localStorage.getItem('tendername')))
     },[location])
     const handleChange = (e) => {
-
+        setSelectedFile(e.target.files[0])
     }
     const onSubmit = (e) => {
-        e.preventDefault()
-        const vendor = user.json.result._id
-        const post = {
-            tender:tenderId,
-            vendor
-        }
-        axios.post(`http://localhost:5000/api/vendor/bid/${vendor}`,post)
+        e.preventDefault ()
+        const formData = new FormData ()
+        formData.append('tender', selectedFile)
+        axios.post(`http://localhost:5000/api/government/upload/${tenderId}`,formData)
         .then((data) => console.log(data))
 
     }

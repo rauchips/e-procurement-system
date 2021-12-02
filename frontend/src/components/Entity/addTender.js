@@ -11,6 +11,7 @@ const AddTender = () => {
     const initialState = {title:'',category:'',document:""}
     const [startDate, setStartDate] = useState(new Date());
     const [inputData, setInputData] = useState(initialState)
+    const [tenderId,setTenderId] = useState ('')
     const [data,setData] = useState([]);
     const [selectedFile,setSelectedFile] = useState("");
     const [member,setMember] = useState(JSON.parse(localStorage.getItem('committeemembers')));
@@ -20,7 +21,6 @@ const AddTender = () => {
     },[location])
     useEffect (() => {
         getData ()
-        onClick ()
     },[])
     const getData = async () => {
         try {
@@ -55,14 +55,13 @@ const AddTender = () => {
             rep:user.json.result._id,
             title:inputData.title,
         }
-        console.log(member)
-        console.log(post)
         axios.post(`http://localhost:5000/api/government/tender/${user.json.result._id}`,post)
-        .then((data) => console.log(data))
-        alert ("Make this tender")
-        history.push("/government/home")
+        .then((res) => setTenderId(res.data._id))
+        alert ("Please upload the tender document now")
+
 
     }
+    console.log(tenderId)
 
     const onClick = async (id) => {
         var members = JSON.parse(localStorage.getItem("committeemembers"));
@@ -76,8 +75,11 @@ const AddTender = () => {
         e.preventDefault ()
         const formData = new FormData ()
         formData.append('tender', selectedFile)
-        axios.post(`http://localhost:5000/api/government/upload/${user.json.result._id}`,formData)
+        axios.post(`http://localhost:5000/api/government/upload/${tenderId}`,formData)
         .then((data) => console.log(data))
+        history.push("/government/home")
+        localStorage.removeItem('committeemembers')
+        localStorage.removeItem('member')
     }
     return (
         <>

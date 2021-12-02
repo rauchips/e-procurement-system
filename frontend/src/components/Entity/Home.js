@@ -22,20 +22,21 @@ const EntityHome = () => {
         try {
             const response = await fetch (`http://localhost:5000/api/government/tender/${user.json.result._id}`)
             const result = await response.json ()
+            result.map ( async (tender) => {
+                console.log(tender._id)
+                const response = await fetch (`http://localhost:5000/api/government/upload/${tender._id}`)
+                const res = await response.json ()
+                setDocumentData(res)
+                console.log (res)
+                })
             setData(result)
-            console.log (result)
         } catch (error) {
             console.log(error)
         }
-        try {
-            const response = await fetch (`http://localhost:5000/api/government/upload/${user.json.result._id}`)
-            const result = await response.json ()
-            setDocumentData(result)
-            console.log (result)
-        } catch (error) {
-            console.log(error)
-        }
+       
     }
+
+    
 
     return (
         <div>
