@@ -10,7 +10,7 @@ const AddTender = () => {
     const location = useLocation ();
     const initialState = {title:'',category:'',document:""}
     const [startDate, setStartDate] = useState(new Date());
-    const [formData, setFormData] = useState(initialState)
+    const [inputData, setInputData] = useState(initialState)
     const [data,setData] = useState([]);
     const [selectedFile,setSelectedFile] = useState("");
     const [member,setMember] = useState(JSON.parse(localStorage.getItem('committeemembers')));
@@ -20,6 +20,7 @@ const AddTender = () => {
     },[location])
     useEffect (() => {
         getData ()
+        onClick ()
     },[])
     const getData = async () => {
         try {
@@ -31,10 +32,10 @@ const AddTender = () => {
         }
     }
     const handleChange =(e) => {
-        setFormData({...formData,[e.target.name]:e.target.value})
+        setInputData({...inputData,[e.target.name]:e.target.value})
     }
     const handleFileChange =(e) => {
-        setSelectedFile({selectedFile:e.target.files[0]})
+        setSelectedFile(e.target.files[0])
     }        
     const [user,setUser] = useState(JSON.parse(localStorage.getItem('entityprofile')));
     console.log(member)
@@ -52,7 +53,7 @@ const AddTender = () => {
             committee:member,
             closingAt:date,
             rep:user.json.result._id,
-            title:formData.title,
+            title:inputData.title,
         }
         console.log(member)
         console.log(post)
@@ -60,7 +61,6 @@ const AddTender = () => {
         .then((data) => console.log(data))
         alert ("Make this tender")
         history.push("/government/home")
-        localStorage.removeItem("committeemembers")
 
     }
 
@@ -75,7 +75,7 @@ const AddTender = () => {
     const onUpload = (e) => {
         e.preventDefault ()
         const formData = new FormData ()
-        formData.append('filename', selectedFile)
+        formData.append('tender', selectedFile)
         axios.post(`http://localhost:5000/api/government/upload/${user.json.result._id}`,formData)
         .then((data) => console.log(data))
     }
