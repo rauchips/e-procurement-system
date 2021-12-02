@@ -27,10 +27,11 @@ router.route('/tender/:id')
   .get(comController.getTender)
 
 /* 
-  GET BID BY ID SETUP
+  GET AND APPROVE BID BY ID SETUP
 */
 
 router.route('/bid/:id')
   .get(comController.getBid)
+  .patch(comController.approveBid)
 
 module.exports = router;
