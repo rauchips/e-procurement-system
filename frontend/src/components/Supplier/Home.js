@@ -14,7 +14,6 @@ const SupplierHome = () => {
 
 
     const [tendersData,setTendersData] = useState ([])
-    const [documentData,setDocumentData] = useState ([])
 
     useEffect (() => {
         getData ()
@@ -24,18 +23,6 @@ const SupplierHome = () => {
         try {
         const response = await fetch ("http://localhost:5000/api/admin/tenders")
         const result = await response.json ()
-        result.body.map ( async (tender) => {
-            console.log(tender._id)
-            const response = await fetch (`http://localhost:5000/api/government/upload/${tender._id}`)
-            const res = await response.json ()
-            res.map((file) => {
-                if (tender._id === file.tender._id ) {
-                    setDocumentData(res)
-                }
-            console.log (res)
-            })
-            
-            })
         console.log(result)
         setTendersData(result.body)
         return result.body
@@ -77,14 +64,10 @@ const SupplierHome = () => {
                 {
                     tender.status === false?<td>Active</td>:<td>Inactive</td>
                 }
-                {
-                documentData.map(document => (
-                    <td>
-                        {document.filename}
-                        <a href= {`../../../public/uploads/${document.filename}`} download><i className='fa fa-download'></i></a>
-                    </td>
-                ))
-            }
+                 <td>
+                        {tender.filename}
+                        <a href= {`../../../public/uploads/${tender.filename}`} download><i className='fa fa-download'></i></a>
+                </td>
                 <td>
                     <div style={{display:"flex"}}>
                     <div className="m-2">
