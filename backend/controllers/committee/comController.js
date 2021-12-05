@@ -103,7 +103,7 @@ exports.getBid = async (req, res, next) => {
 exports.approveBid = async (req, res, next) => {
   try {
     
-    await Bid.updateOne({ status: false },{ $set: { status: true } })
+    await Bid.updateOne({ _id: req.params.id , status: false},{ $set: { status: true } }, { new: true })
       .then(result => {
         if(!result) return res.json({ message: 'This bid request does not exist' })
         return res.status(200).json(result)

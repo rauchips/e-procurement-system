@@ -80,4 +80,8 @@ router.route('/committees/:id')
   .patch(adminController.patchCommittee)
   .delete(adminController.deleteCommittee)
 
+//get all bids
+router.route('/bids')
+  .get(adminController.getAllBids)
+
 module.exports = router;

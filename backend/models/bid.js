@@ -10,6 +10,10 @@ const bidSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'vendors'
   },
+  tenders:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'tenders'
+  },
   createdAt: {
     type: Date,
     default: Date.now

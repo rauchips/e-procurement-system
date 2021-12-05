@@ -28,17 +28,17 @@ const CommitteeNavbar = () => {
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                     <Link to = "/">
                     <li className="nav-item">
-                        <button className='btn btn-outline-primary nav-link btn-sm'>Add Tender</button>
+                        <button className='btn btn-outline-primary nav-link btn-sm'>Tenders</button>
                     </li>
                     </Link>
                     <Link to = "/government/home">
                     <li className="nav-item">
-                    <button className='btn btn-outline-primary nav-link btn-sm'>Accepted Tenders</button>
+                    <button className='btn btn-outline-primary nav-link btn-sm'>Bids</button>
                     </li>
                     </Link>
                     <Link to = "/government/home">
                     <li className="nav-item">
-                    <button className='btn btn-outline-primary nav-link btn-sm'>Committee</button>
+                    <button className='btn btn-outline-primary nav-link btn-sm'>Confirmed bids</button>
                     </li>
                     </Link>
                 

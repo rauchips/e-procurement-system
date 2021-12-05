@@ -5,6 +5,8 @@ const Gov = require('../../models/government');
 const Vendor = require('../../models/vendor');
 const Committee = require('../../models/committee');
 const Tender = require('../../models/tender');
+const Bid = require('../../models/bid');
+
 
 /*
   REGISTER SETUP
@@ -325,6 +327,24 @@ exports.deleteCommittee = async (req, res, next) => {
         if(!result) return res.json({ message: 'Committee does not exist' })
         return res.status(200).json({ message: 'Committee has been deleted' })
       })
+
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+}
+
+//get all bids
+exports.getAllBids = async (req, res, next) => {
+  try {
+    
+    await Bid.find()
+    .populate('tenders vendor')
+      .then((result) => res.status(200).json({
+        count: result.length,
+        body: result
+      }))
+      .catch(error => console.error(error))
 
   } catch (error) {
     console.error(error);

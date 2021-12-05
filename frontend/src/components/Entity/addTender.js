@@ -8,29 +8,15 @@ import axios from "axios"
 const AddTender = () => {
     const history = useHistory ();
     const location = useLocation ();
-    const initialState = {title:'',category:'',document:""}
+    const initialState = {title:'',category:''}
     const [startDate, setStartDate] = useState(new Date());
     const [inputData, setInputData] = useState(initialState)
-    const [tenderId,setTenderId] = useState ('')
-    const [data,setData] = useState([]);
     const [selectedFile,setSelectedFile] = useState("");
     const [member,setMember] = useState(JSON.parse(localStorage.getItem('committeemembers')));
     useEffect (() => {
         // const token =user?.token;
         setMember(JSON.parse(localStorage.getItem('committeemembers')))
     },[location])
-    useEffect (() => {
-        getData ()
-    },[])
-    const getData = async () => {
-        try {
-            const response = await fetch ("http://localhost:5000/api/committee/register")
-            const result = await response.json ()
-            setData(result)
-        } catch (error) {
-            console.log(error)
-        }
-    }
     const handleChange =(e) => {
         setInputData({...inputData,[e.target.name]:e.target.value})
     }
@@ -38,68 +24,49 @@ const AddTender = () => {
         setSelectedFile(e.target.files[0])
     }        
     const [user,setUser] = useState(JSON.parse(localStorage.getItem('entityprofile')));
-    console.log(member)
+    console.log(selectedFile)
     useEffect (() => {
         // const token =user?.token;
         setUser(JSON.parse(localStorage.getItem('entityprofile')))
     },[location])
-    console.log(selectedFile)
 
     const onSubmit = (e) => {
         e.preventDefault()
         const date = startDate
-
-        const post = {
-            committee:member,
-            closingAt:date,
-            rep:user.json.result._id,
-            title:inputData.title,
-        }
-        axios.post(`http://localhost:5000/api/government/tender/${user.json.result._id}`,post)
-        .then((res) => setTenderId(res.data._id))
-        alert ("Please upload the tender document now")
-
-
-    }
-    console.log(tenderId)
-
-    const onClick = async (id) => {
-        var members = JSON.parse(localStorage.getItem("committeemembers"));
-        if(members == null) members = [];
-        localStorage.setItem("member", JSON.stringify(id));
-        // Save allEntries back to local storage
-       members.push(id);
-        localStorage.setItem("committeemembers", JSON.stringify(members));
-    }
-    const onUpload = (e) => {
-        e.preventDefault ()
         const formData = new FormData ()
         formData.append('tender', selectedFile)
-        axios.post(`http://localhost:5000/api/government/upload/${tenderId}`,formData)
-        .then((data) => console.log(data))
+        formData.set("closingAt",date)
+        // formData.append("committee",member)
+        formData.set("rep",user.json.result._id)
+        formData.set("title",inputData.title)
+
+        console.log(user.json.result._id)
+        console.log(member)
+
+        axios.post(`http://localhost:5000/api/government/tender/${user.json.result._id}`,formData)
+        .then((res) => console.log(res))
+        alert ("Confirm uploading of this tender")
         history.push("/government/home")
-        localStorage.removeItem('committeemembers')
-        localStorage.removeItem('member')
+       
+
     }
+
+   
     return (
         <>
         <EntityNavbar/>
-        <div className='container sign'>
-            <div className='card'>
-            
-                <div className="row padding">
+        <div className='container add-tender'>
                     
-                    <div className="col-md-12 col-sm-12 col-lg-6">
                     <form onSubmit={onSubmit}>
                     <div className="card">
                     <h5 className='text-center mb-3'>Add Tender</h5>
                     <div className="mb-3">
                         <label for="exampleInputEmail1"  className="form-label">Title</label>
-                        <input onChange={handleChange} type="text" name="title"  className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+                        <input required onChange={handleChange} type="text" name="title"  className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
                     </div>
                     <div className="mb-3">
                         <label for="exampleInputPassword1"  className="form-label">Category</label>
-                        <input onChange={handleChange} type="text" name="category" className="form-control" id="exampleInputPassword1"/>
+                        <input required onChange={handleChange} type="text" name="category" className="form-control" id="exampleInputPassword1"/>
                     </div>
                     <div className="mb-3">
                         <label for="exampleInputPassword1"  className="form-label">Closing At</label>
@@ -114,57 +81,23 @@ const AddTender = () => {
                             className="form-control date"
                         />
                     </div>
-                   
-               
-                </div>
-                <div className="text-center mt-3">
-                    <button type="submit" className="btn btn-outline-success btn-md">Add</button>
-                </div>
-            </form>
-                </div>
-                <div className="col-lg-6">
-                <div className="card">
-                <h5 className="text-center">Add 3 Committee Members</h5>
-                            <table className="table table-bordered">
-                                <thead>
-                                    <tr>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Action</th>
-                                    </tr>
-                                </thead>
-                                {
-                    data.map (member => (
-                        <>
-                                <tbody>
-                                    <tr>
-                                    <td >{member.name}</td>
-                                    <td className="text-center">
-                                        <button className='btn btn-outline-primary btn-md' onClick={(() => onClick(member._id))} >Add</button>
-                                    </td>
-                                    </tr>
-                                    
-                                </tbody>
-                                </>
-                            ))
-                                 }
-                             </table>
-            </div>
-                </div>
-               
-                </div>
-               
-            <form onSubmit ={onUpload}>
-                <div class="form-group">
+                    <div class="form-group">
                     <label for="exampleFormControlFile1">Add a Document</label>
-                    <input type="file" onChange={handleFileChange} className="form-control-file" id="exampleFormControlFile1"/>
+                    <input required type="file" onChange={handleFileChange} className="form-control-file" id="exampleFormControlFile1"/>
                 </div>
                    
-                <div className="mt-3">
-                    <button type="submit" className="btn btn-outline-success btn-md">Upload</button>
+               
                 </div>
-            </form>
+                <div className="text-center mt-5">
+                    <button type="submit" className="btn btn-outline-success btn-lg">Add</button>
+                </div>
+               
+                </form>
+
+                
+               
+
            
-         </div>   
         </div>
         </>
     )

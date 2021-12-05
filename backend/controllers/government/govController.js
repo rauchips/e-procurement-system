@@ -92,7 +92,7 @@ exports.getTender = async (req, res, next) => {
 
 exports.makeTender = async (req, res, next) => {
   try {
-    let { title, category, description, closingAt, rep, committee } = req.body
+    console.log(req.body)
 
     if(req.params.id != String(req.body.rep)) return res.json({ message: 'This tender is not related to the named Entity' })
 
@@ -100,7 +100,15 @@ exports.makeTender = async (req, res, next) => {
       .then((tender) => {
       if(tender) return res.json({ message: 'This tender already exists' });
 
-      let newTender = new Tender(req.body)
+      let newTender = new Tender({
+        filename: req.file.filename,
+        title:req.body.title,
+        category:req.body.category,
+        description:req.body.description,
+        closingAt:req.body.closingAt,
+        rep:req.params.id,
+
+      })
       newTender.save()
         .then((result) => res.status(201).json(result))
         .catch(err => console.error(err))
@@ -111,6 +119,27 @@ exports.makeTender = async (req, res, next) => {
     next(error);
   }
 }
+
+
+//add committee
+exports.patchCommittee = async (req, res, next) => {
+  try {
+    
+    await Tender.updateOne({ _id: req.params.id },{ $set: {
+      'committee': req.body.committee,
+    } })
+      .then(result => {
+        if(!result) return res.json({ message: 'Tender does not exist' })
+        return res.status(200).json(result)
+      })
+      .catch(err => res.json(err))
+
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+}
+
 
 // exports.closeTender = async (req, res, next) => {
 //   try {
@@ -157,7 +186,6 @@ exports.uploadTender = async (req, res, next) => {
         
         let newFile = new File({
           filename: req.file.filename,
-          tender: req.params.id
         })
         newFile.save()
           .then((result) => res.status(201).json(result))

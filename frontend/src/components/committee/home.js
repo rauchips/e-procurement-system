@@ -24,6 +24,9 @@ const CommitteeHome = () => {
         console.log(result)
         setData(result.tender)
     }
+    const onClick = (id) => {
+        localStorage.setItem('tenderId',JSON.stringify({id}))
+    }
     return (
         <div>
             <CommitteeNavbar/>
@@ -53,10 +56,13 @@ const CommitteeHome = () => {
                     <td>
                     {tender.status === true?"true":"false" }
                     </td>
-                    <td>@mdo</td>
                     <td>
-                        <Link to="/government/committee-members">
-                        <button className='btn btn-outline-success btn-md'>Verify</button>
+                        {tender.filename}
+                        <a href= {`../../../public/uploads/${tender.filename}`} download><i className='fa fa-download'></i></a>
+                </td>
+                    <td>
+                        <Link to='/committee/view-bids'>
+                        <button className='btn btn-outline-success btn-md' onClick={(()=> onClick (tender._id))} >View Bids</button>
                         </Link>
                     </td>
                     </tr>

@@ -8,3 +8,12 @@
 .login {
     width: 50%;
 }
+.add-tender {
+    padding: 20px;
+    margin-top: 20px;
+    width: 50%;
+}
+.add-tender .card {
+    padding: 20px;
+
+}

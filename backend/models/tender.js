@@ -4,6 +4,7 @@ const tenderSchema = mongoose.Schema({
   title: String,
   category: String,
   description: String,
+  filename: String,
   status: {
     type: Boolean,
     default: false

@@ -36,11 +36,6 @@ const EntityNavbar = () => {
                     <button className='btn btn-secondary nav-link btn-sm'>Add Tenders</button>
                     </li>
                     </Link>
-                    <Link to = "/government/home">
-                    <li className="nav-item">
-                    <button className='btn btn-secondary nav-link btn-sm'>Bids</button>
-                    </li>
-                    </Link>
                 
                 </ul>
                 <div style={{marginRight:"80px"}}>

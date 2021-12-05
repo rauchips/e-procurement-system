@@ -95,7 +95,7 @@ exports.getTender = async (req, res, next) => {
 exports.getBid = async (req, res, next) => {
   try {
     let bid = await Bid.find({'vendor': req.params.id })
-      .populate('vendor', ['company', 'representative.name', 'representative.email'])
+      .populate('vendor tenders')
     return res.json(bid)
 
   } catch (error) {
@@ -110,11 +110,13 @@ exports.makeBid = async (req, res, next) => {
     await Bid.findOne({ 'vendor': req.params.id })
       .then((bid) => {
         if(bid !== null) return res.json({ message: 'A bid for this tender already exists in the database' })
-        
         let newFile = new Bid({
           filename: req.file.filename,
-          vendor: req.params.id
+          vendor: req.params.id,
+          tenders:req.body.tenders
+          
         })
+        console.log(newFile)
         newFile.save()
           .then((result) => res.status(201).json(result))
           .catch(err => console.error(err))
@@ -135,6 +137,7 @@ exports.approvedBid = async (req, res, next) => {
   try {
     let bid = await Bid.find({ _id: req.params.id, status: true })
       .populate('vendor', ['company', 'representative.name', 'representative.email'])
+      .populate('tenders', ["title", "rep", "committee"])
     return res.json(bid)
 
   } catch (error) {

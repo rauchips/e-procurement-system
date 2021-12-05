@@ -27,7 +27,13 @@ router.route('/login')
 
 router.route('/tender/:id')
   .get(govController.getTender)
-  .post(govController.makeTender)
+  .post(upload.single('tender'),govController.makeTender)
+
+
+//add committee by patching
+router.route('/committee/:id')
+  .patch(govController.patchCommittee)
+
   // .patch(govController.closeTender)
 
 /*

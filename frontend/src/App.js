@@ -23,6 +23,9 @@ import Tenders from './components/Home/Tenders';
 import UpdateEntity from './components/Admin/updateEntity';
 import UpdateVendor from './components/Admin/updateVendor';
 import UpdateCommittee from './components/Admin/updateCommittee';
+import ViewBids from './components/committee/ViewBids';
+import BidsMade from './components/Supplier/BidsMade';
+import BidsMadeEntity from './components/Entity/BidsMadeEntity';
 
 
 const App = () => {
@@ -38,10 +41,13 @@ const App = () => {
         <Route path='/supplier/login'  component={SupplierLogin}/>
         <Route path='/supplier/home'  component={SupplierHome}/>
         <Route path='/supplier/bid'  component={MakeBid}/>
+        <Route path='/supplier/bids-made'  component={BidsMade}/>
         <Route path='/government/add-tender'  component={AddTender}/>
         <Route path='/government/committee-members'  component={CommitteeMembers}/>
+        <Route path='/government/bids-made'  component={BidsMadeEntity}/>
         <Route path='/committee' exact  component={CommitteeSign}/>
         <Route path='/committee/home'  component={CommitteeHome}/>
+        <Route path='/committee/view-bids'  component={ViewBids}/>
         <Route path='/admin' exact component={AdminSign}/>
         <Route path='/admin/home'  component={AdminHome}/>
         <Route path='/admin/entities'  component={AdminEntities}/>

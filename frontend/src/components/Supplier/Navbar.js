@@ -31,7 +31,7 @@ const SupplierNavbar = () => {
                         <button className='btn btn-secondary nav-link btn-sm'>Home</button>
                     </li>
                     </Link>
-                    <Link to = "/government/home">
+                    <Link to = '/supplier/bids-made'>
                     <li className="nav-item">
                     <button className='btn btn-secondary nav-link btn-sm'>Bids made</button>
                     </li>

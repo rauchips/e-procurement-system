@@ -25,12 +25,16 @@ const MakeBid = () => {
     const handleChange = (e) => {
         setSelectedFile(e.target.files[0])
     }
+    console.log(tenderId.id)
     const onSubmit = (e) => {
         e.preventDefault ()
         const formData = new FormData ()
-        formData.append('tender', selectedFile)
-        axios.post(`http://localhost:5000/api/government/upload/${tenderId}`,formData)
+        formData.append('bid', selectedFile)
+        formData.set("tenders",tenderId.id)
+        axios.post(`http://localhost:5000/api/vendor/bid/${user.json.result._id}`,formData)
         .then((data) => console.log(data))
+        localStorage.removeItem ("tenderId")
+        localStorage.removeItem ("tendername")
 
     }
     return (
