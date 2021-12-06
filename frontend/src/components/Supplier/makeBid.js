@@ -2,6 +2,7 @@ import React,{useEffect,useState} from 'react'
 import SupplierNavbar from './Navbar'
 import { useLocation,useHistory } from 'react-router-dom'
 import axios from 'axios'
+import "../Sign/Sign.css"
 
 const MakeBid = () => {
     const history = useHistory()
@@ -9,17 +10,14 @@ const MakeBid = () => {
     const [selectedFile,setSelectedFile] = useState("");
     const [user,setUser] = useState(JSON.parse(localStorage.getItem('vendorprofile')));
     useEffect (() => {
-        // const token =user?.token;
         setUser(JSON.parse(localStorage.getItem('vendorprofile')))
     },[location])
     const [tenderId,setTenderId] = useState(JSON.parse(localStorage.getItem('tenderId')));
     useEffect (() => {
-        // const token =user?.token;
         setTenderId(JSON.parse(localStorage.getItem('tenderId')))
     },[location])
     const [tenderName,setTenderName] = useState(JSON.parse(localStorage.getItem('tendername')));
     useEffect (() => {
-        // const token =user?.token;
         setTenderName(JSON.parse(localStorage.getItem('tendername')))
     },[location])
     const handleChange = (e) => {
@@ -33,6 +31,7 @@ const MakeBid = () => {
         formData.set("tenders",tenderId.id)
         axios.post(`http://localhost:5000/api/vendor/bid/${user.json.result._id}`,formData)
         .then((data) => console.log(data))
+        history.push('/supplier/home')
         localStorage.removeItem ("tenderId")
         localStorage.removeItem ("tendername")
 

@@ -12,15 +12,18 @@ const CommitteeMembers = () => {
         setTenderId(JSON.parse(localStorage.getItem('tenderId')))
     },[location])
     const [data,setData] = useState([]);
+    const [isLoading,setIsLoading] = useState(false)
     useEffect (() => {
         getData ()
         onClick ()
     },[])
     const getData = async () => {
         try {
+            setIsLoading(true)
             const response = await fetch ("http://localhost:5000/api/committee/register")
             const result = await response.json ()
             setData(result)
+            setIsLoading(false)
         } catch (error) {
             console.log(error)
         }
@@ -47,14 +50,23 @@ const CommitteeMembers = () => {
             committee:member
         }
         axios.patch (`http://localhost:5000/api/government/committee/${tenderId}`,post)
+        history.push("/government/home")
     }
 
     return (
         <div>
             <EntityNavbar/>
             <div className="container login mt-5">
-                <h5 className="text-center">Committee Members</h5>
-                            <table className="table table-bordered">
+            {
+                data.length===0?"":<h5 className="text-center">Committee Members</h5>
+            }
+                {
+                    isLoading?<div className='loader'></div>:
+                    <>
+                        {
+                            data.length === 0?<h6 className="mt-5 text-center mb-3 display-4 text-primary">No members are registered for this tender.</h6>:
+                            <>
+                               <table className="table table-bordered">
                                 <thead>
                                     <tr>
                                     <th scope="col">Name</th>
@@ -77,12 +89,18 @@ const CommitteeMembers = () => {
                             ))
                                  }
                              </table>
-            </div>
             <form onSubmit={onSubmit}>
             <div className='text-center mt-4'>
                 <button className='btn btn-primary btn-md' >Add</button>
             </div>
-            </form>
+            </form> 
+                            </>
+                        }
+                    </>
+                }
+                            
+            </div>
+            
            
         </div>
     )

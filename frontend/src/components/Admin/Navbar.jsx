@@ -1,16 +1,9 @@
-import React,{useEffect,useState} from 'react'
-import "./Navbar.css"
-import { useLocation,useHistory,Link } from 'react-router-dom';
+import React from 'react'
+import "../Navbar/Navbar.css"
+import {useHistory,Link } from 'react-router-dom';
 
 const AdminNavbar = () => {
-    const location = useLocation();
     const history = useHistory ();
-    const [user,setUser] = useState(JSON.parse(localStorage.getItem('adminprofile')));
-    useEffect (() => {
-        // const token =user?.token;
-        setUser(JSON.parse(localStorage.getItem('adminprofile')))
-    },[location])
-
     const onClick = () => {
         localStorage.removeItem("adminprofile")
         history.push("/admin")
@@ -25,31 +18,21 @@ const AdminNavbar = () => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                    <Link to = "/admin/home">
                     <li className="nav-item">
-                        <button className='btn btn-outline-primary nav-link btn-sm'>Home</button>
+                        <a className='btn btn-outline-primary nav-link btn-sm' href="/admin/home" >Home</a>
                     </li>
-                    </Link>
-                    <Link to = "/admin/entities">
                     <li className="nav-item">
-                    <button className='btn btn-outline-primary nav-link btn-sm'>Entities</button>
+                    <a className='btn btn-outline-primary nav-link btn-sm' href="/admin/entities" >Entities</a>
                     </li>
-                    </Link>
-                    <Link to = '/admin/vendors'>
                     <li className="nav-item">
-                    <button className='btn btn-outline-primary nav-link btn-sm'>Vendors</button>
+                    <a className='btn btn-outline-primary nav-link btn-sm' href='/admin/vendors' >Vendors</a>
                     </li>
-                    </Link>
-                    <Link to = '/admin/committee'>
                     <li className="nav-item">
-                    <button className='btn btn-outline-primary nav-link btn-sm'>Committee</button>
+                    <a className='btn btn-outline-primary nav-link btn-sm' href='/admin/committee' >Committee</a>
                     </li>
-                    </Link>
-                    <Link to = '/admin/tenders'>
                     <li className="nav-item">
-                    <button className='btn btn-outline-primary nav-link btn-sm'>Tenders</button>
+                    <a className='btn btn-outline-primary nav-link btn-sm' href='/admin/tenders' >Tenders</a>
                     </li>
-                    </Link>
                 
                 </ul>
                 {/* <h6 style={{marginRight:"40px"}}>Welcome, {user.json.result.name}</h6> */}

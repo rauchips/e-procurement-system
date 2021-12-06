@@ -4,6 +4,7 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import {useHistory,useLocation} from "react-router-dom"
 import axios from "axios"
+import "../Sign/Sign.css"
 
 const AddTender = () => {
     const history = useHistory ();
@@ -26,7 +27,6 @@ const AddTender = () => {
     const [user,setUser] = useState(JSON.parse(localStorage.getItem('entityprofile')));
     console.log(selectedFile)
     useEffect (() => {
-        // const token =user?.token;
         setUser(JSON.parse(localStorage.getItem('entityprofile')))
     },[location])
 
@@ -36,7 +36,6 @@ const AddTender = () => {
         const formData = new FormData ()
         formData.append('tender', selectedFile)
         formData.set("closingAt",date)
-        // formData.append("committee",member)
         formData.set("rep",user.json.result._id)
         formData.set("title",inputData.title)
 
@@ -89,7 +88,7 @@ const AddTender = () => {
                
                 </div>
                 <div className="text-center mt-5">
-                    <button type="submit" className="btn btn-outline-success btn-lg">Add</button>
+                    <button type="submit" className="btn btn-success btn-lg">Add</button>
                 </div>
                
                 </form>

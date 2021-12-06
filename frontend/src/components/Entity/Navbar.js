@@ -1,23 +1,15 @@
-import React,{useState,useEffect} from 'react'
+import React from 'react';
 import { Link, useHistory } from "react-router-dom";
-import { useLocation } from 'react-router-dom';
 import "../Navbar/Navbar.css"
 
 const EntityNavbar = () => {
-    const location = useLocation();
     const history = useHistory ();
-    const [user,setUser] = useState(JSON.parse(localStorage.getItem('entityprofile')));
-    useEffect (() => {
-        // const token =user?.token;
-        setUser(JSON.parse(localStorage.getItem('entityprofile')))
-    },[location])
-
     const onClick = () => {
         localStorage.clear()
         history.push("/")
     }
     return (
-        <div className='container-fluid navbarpage'>
+        <div className=' navbarpage'>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
                 <a className="navbar-brand" href="/">Procurement System</a>

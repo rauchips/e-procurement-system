@@ -1,38 +1,43 @@
-import React from 'react';
+import React,{Suspense,lazy} from 'react';
 import {BrowserRouter as Router,Route} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css"
-import Home from "./components/Home/Home";
-import GovernmentSign from "./components/Sign/Government";
-import SupplierSign from "./components/Sign/Supplier";
-import EntityHome from "./components/Entity/Home";
-import SupplierHome from "./components/Supplier/Home";
-import AddTender from "./components/Entity/addTender";
-import CommitteeSign from "./components/committee/sign";
-import CommitteeHome from "./components/committee/home";
-import CommitteeMembers from "./components/Entity/CommitteeMembers";
-import GovernmentLogin from "./components/login/Government"
-import SupplierLogin from "./components/login/Supplier"
-import AdminSign from "./components/Admin/Sign"
-import AdminHome from "./components/Admin/Home"
-import AdminEntities from "./components/Admin/Entities"
-import AdminVendors from './components/Admin/vendors';
-import AdminCommittee from './components/Admin/committee';
-import AdminTenders from './components/Admin/Tenders';
-import MakeBid from './components/Supplier/makeBid';
-import Tenders from './components/Home/Tenders';
-import UpdateEntity from './components/Admin/updateEntity';
-import UpdateVendor from './components/Admin/updateVendor';
-import UpdateCommittee from './components/Admin/updateCommittee';
-import ViewBids from './components/committee/ViewBids';
-import BidsMade from './components/Supplier/BidsMade';
-import BidsMadeEntity from './components/Entity/BidsMadeEntity';
+import "./App.css"
+
+
 
 
 const App = () => {
+  const Home = lazy(() => import ("./components/Home/Home"))
+  const Tenders = lazy(() => import ("./components/Home/Tenders"))
+  const GovernmentSign = lazy(() => import ("./components/Sign/Government"))
+  const GovernmentLogin = lazy(() => import ("./components/login/Government"))
+  const EntityHome = lazy(() => import ("./components/Entity/Home"))
+  const SupplierSign = lazy(() => import ("./components/Sign/Supplier"))
+  const SupplierLogin = lazy(() => import ("./components/login/Supplier"))
+  const SupplierHome = lazy(() => import ("./components/Supplier/Home"))
+  const MakeBid = lazy(() => import ("./components/Supplier/makeBid"))
+  const BidsMade = lazy(() => import ("./components/Supplier/BidsMade"))
+  const AddTender = lazy(() => import ("./components/Entity/addTender"))
+  const CommitteeMembers = lazy(() => import ("./components/Entity/CommitteeMembers"))
+  const BidsMadeEntity = lazy(() => import ("./components/Entity/BidsMadeEntity"))
+  const CommitteeSign = lazy(() => import ("./components/committee/sign"))
+  const CommitteeHome = lazy(() => import ("./components/committee/home"))
+  const ViewBids = lazy(() => import ("./components/committee/ViewBids"))
+  const AdminSign = lazy(() => import ("./components/Admin/Sign"))
+  const AdminHome = lazy(() => import ("./components/Admin/Home"))
+  const AdminEntities = lazy(() => import ("./components/Admin/Entities"))
+  const AdminVendors = lazy(() => import ("./components/Admin/vendors"))
+  const AdminCommittee = lazy(() => import ("./components/Admin/committee"))
+  const AdminTenders = lazy(() => import ("./components/Admin/Tenders"))
+  const UpdateEntity = lazy(() => import ("./components/Admin/updateEntity"))
+  const UpdateVendor = lazy(() => import ("./components/Admin/updateVendor"))
+  const UpdateCommittee = lazy(() => import ("./components/Admin/updateCommittee"))
+
   return (
     <div>
       <Router>
-        <Route path='/' exact component={Home}/>
+      <Suspense fallback = {<div className="loader"></div>}>
+      <Route path='/' exact component={Home}/>
         <Route path='/tenders' exact component={Tenders}/>
         <Route path='/government/sign'  component={GovernmentSign}/>
         <Route path='/government/login'  component={GovernmentLogin}/>
@@ -57,6 +62,7 @@ const App = () => {
         <Route path='/admin/update-entity'  component={UpdateEntity}/>
         <Route path='/admin/update-vendor'  component={UpdateVendor}/>
         <Route path='/admin/update-committee'  component={UpdateCommittee}/>
+      </Suspense>
       </Router>
     </div>
   )

@@ -224,7 +224,7 @@ exports.getAllTenders = async (req, res, next) => {
   try {
     
     await Tender.find()
-      .populate('rep', ['representative.name', 'representative.email'])
+      .populate('rep', ['representative.name', 'representative.email','entity'])
       .populate('committee', ['name', 'email', 'telephone'])
       .then((result) => res.status(200).json({
         count: result.length,

@@ -1,6 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import { Link, useHistory } from "react-router-dom";
-import { useLocation } from 'react-router-dom';
+import { useLocation , useHistory} from 'react-router-dom';
 import "../Navbar/Navbar.css"
 
 const CommitteeNavbar = () => {
@@ -17,7 +16,7 @@ const CommitteeNavbar = () => {
         history.push("/committee")
     }
     return (
-        <div className='container-fluid navbarpage'>
+        <div className=' navbarpage'>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
                 <a className="navbar-brand" href="/">Procurement System</a>
@@ -26,21 +25,9 @@ const CommitteeNavbar = () => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                    <Link to = "/">
                     <li className="nav-item">
-                        <button className='btn btn-outline-primary nav-link btn-sm'>Tenders</button>
+                        <a href='/committee/home' className='nav-link'>Home</a>
                     </li>
-                    </Link>
-                    <Link to = "/government/home">
-                    <li className="nav-item">
-                    <button className='btn btn-outline-primary nav-link btn-sm'>Bids</button>
-                    </li>
-                    </Link>
-                    <Link to = "/government/home">
-                    <li className="nav-item">
-                    <button className='btn btn-outline-primary nav-link btn-sm'>Confirmed bids</button>
-                    </li>
-                    </Link>
                 
                 </ul>
                 <h6 style={{marginRight:"40px"}}>Welcome, {user.json.result.name}</h6>

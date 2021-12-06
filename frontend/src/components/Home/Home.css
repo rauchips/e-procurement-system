@@ -1,10 +1,8 @@
 .home-fluid {
-    background-color: rgb(228, 226, 226);
-    padding: 50px;
-    color: black;
+    padding: 20px;
+    color: #000000;
 }
 .about {
-    background-color: rgb(238, 238, 238);
     padding: 30px;
     border-radius: 20px;
 }

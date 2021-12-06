@@ -1,12 +1,12 @@
 import React,{useState,useEffect} from 'react'
-import { useHistory, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import CommitteeNavbar from './Navbar';
 
 const BidsMade = () => {
     const options = { year: "numeric", month: "long", day: "numeric",hour: '2-digit', minute: '2-digit' }
     const location = useLocation ();
-    const history = useHistory ();
     const [data,setData] = useState([]);
+    const [isLoading,setIsLoading] = useState (false)
    
     const [user,setUser] = useState(JSON.parse(localStorage.getItem('vendorprofile')));
     useEffect (() => {
@@ -20,10 +20,12 @@ const BidsMade = () => {
 
     const getData = async () => {
         try {
+            setIsLoading(true)
             const response = await fetch ("http://localhost:5000/api/admin/bids")
             const result = await response.json()
             console.log(result)
             setData(result.body)
+            setIsLoading (false)
         } catch (error) {
             console.log(error)
         }
@@ -33,7 +35,13 @@ const BidsMade = () => {
         <div>
         <CommitteeNavbar/>
         <div className="container mt-5 committee">
-            <h5 className="text-center mb-3"> These are the bids you have made.</h5>
+            {
+                isLoading? <div className='loader'></div>:
+                <>
+                    {
+                        data.length === 0? <h6 className="mt-5 text-center mb-3 display-6 text-primary">You have not made any bid.</h6>:
+                        <>
+                             <h5 className="text-center mb-3"> These are the bids you have made.</h5>
             <table className="table table-bordered">
         <thead>
             <tr>
@@ -76,6 +84,11 @@ const BidsMade = () => {
          </tbody>
        
         </table>
+                        </>
+                    }
+                </>
+            }
+           
         </div>
     </div>
     )

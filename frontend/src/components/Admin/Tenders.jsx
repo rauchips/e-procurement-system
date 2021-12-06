@@ -37,7 +37,7 @@ const AdminTenders = () => {
                 <td>{tender.rep.representative.name}</td>
                 <td>{tender.rep.representative.email}</td>
                 {
-                    tender.status === false?<td>False</td>:<td>True</td>
+                    tender.status === false?<td>Active</td>:<td>Closed</td>
                 }
                 <td>
                     <div style={{display:"flex"}}>

@@ -16,7 +16,7 @@ const Navbar = () => {
         setVendor(JSON.parse(localStorage.getItem('vendorprofile')))
     },[location])
     return (
-        <div className='container-fluid navbarpage'>
+        <div className='navbarpage'>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
                 <a className="navbar-brand" href="/">Procurement System</a>
@@ -25,54 +25,46 @@ const Navbar = () => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                    <Link to = "/">
                     <li className="nav-item">
-                        <button className='btn btn-secondary nav-link btn-sm'>Home</button>
+                        <a className='nav-link' href="/">Home</a>
                     </li>
-                    </Link>
-                    <Link to = '/tenders'>
                     <li className="nav-item">
-                    <button className='btn btn-outline-primary nav-link btn-sm'>Tenders</button>
+                    <a className='nav-link' href="/tenders">Tenders</a>
                     </li>
-                    </Link>
                     {
                         vendor?
                         <>
-                            <Link to ="/supplier/home">
                                 <li className="nav-item">
-                                    <button className='btn btn-outline-primary nav-link btn-sm'>Suppliers</button>
+                                    <a className=' nav-link ' href='/supplier/home'>Suppliers</a>
                                 </li>
-                            </Link>
                         </>:
                         <>
-                            <Link to ='/supplier/login'>
                                 <li className="nav-item">
-                                    <button className='btn btn-outline-primary nav-link btn-sm'>Suppliers</button>
+                                    <a className='nav-link' href="/supplier/login">Suppliers</a>
                                 </li>
-                            </Link>
                         </>
                     }
                     {
                         entity?
                         <>
-                            <Link to ="government/home">
                                 <li className="nav-item">
-                                    <button className='btn btn-outline-primary nav-link btn-sm'>Government Entities</button>
+                                    <a className='nav-link' href="government/home">Government Entities</a>
                                 </li>
-                            </Link>
                         </>:
                         <>
-                            <Link to ='/government/login'>
                                 <li className="nav-item">
-                                    <button className='btn btn-outline-primary nav-link btn-sm'>Government Entities</button>
+                                    <a className='nav-link' href="/government/login">Government Entities</a>
                                 </li>
-                            </Link>
                         </>
                     }
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+                    {
+                        !vendor && !entity?
+                        <>
+                             <li class="nav-item dropdown">
+                        <button class="btn btn-primary btn-md nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Registration
-                        </a>
+                        </button>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <Link to = "/government/sign">
                     <button className='btn btn-primary btn-md m-2'>Entity</button>
@@ -83,9 +75,9 @@ const Navbar = () => {
                     </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn btn-primary btn-md nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Login
-                        </a>
+                        </button>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <Link to = "/government/login">
                     <button className='btn btn-primary btn-md m-2'>Entity</button>
@@ -95,6 +87,9 @@ const Navbar = () => {
                     </Link>
                     </ul>
                     </li>
+                        </>:""
+                    }
+                   
                 </ul>
                 </div>
             </div>

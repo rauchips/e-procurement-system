@@ -1,17 +1,17 @@
 import React,{useEffect,useState} from 'react'
-import { useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import CommitteeNavbar from './Navbar'
 import "./committee.css"
-import { Link } from 'react-router-dom';
 
 const CommitteeHome = () => {
+    const history = useHistory()
     const options = { year: "numeric", month: "long", day: "numeric",hour: '2-digit', minute: '2-digit' }
     const location = useLocation ();
     const [user,setUser] = useState(JSON.parse(localStorage.getItem('committeeprofile')));
     const [data,setData] = useState([]);
+    const [isLoading,setIsLoading] = useState(false)
 
     useEffect (() => {
-        // const token =user?.token;
         setUser(JSON.parse(localStorage.getItem('committeeprofile')))
     },[location])
     useEffect (() => {
@@ -19,20 +19,31 @@ const CommitteeHome = () => {
     },[])
 
     const getData = async () => {
+        setIsLoading(true)
         const response = await fetch (`http://localhost:5000/api/committee/tender/${user.json.result._id}`)
         const result = await response.json ()
         console.log(result)
         setData(result.tender)
+        setIsLoading(false)
     }
     const onClick = (id) => {
         localStorage.setItem('tenderId',JSON.stringify({id}))
+        history.push('/committee/view-bids')
     }
     return (
         <div>
             <CommitteeNavbar/>
             <div className="container mt-5 committee">
-                <h5 className="text-center mb-3"> These are the tenders you have been vetted in.</h5>
-                <table className="table table-bordered">
+                {
+                    data.length === 0?"":<h5 className="text-center mb-3"> These are the tenders you have been vetted in.</h5>
+                }
+                {
+                    isLoading?<div className='loader'></div>:
+                    <>
+                        {
+                            data.length === 0 ? <h6 className="mt-5 text-center mb-3 display-4 text-primary">You are not vetted to any tender.</h6>:
+                            <>
+                                <table className="table table-bordered">
             <thead>
                 <tr>
                 <th scope="col">Tender Id</th>
@@ -61,9 +72,7 @@ const CommitteeHome = () => {
                         <a href= {`../../../public/uploads/${tender.filename}`} download><i className='fa fa-download'></i></a>
                 </td>
                     <td>
-                        <Link to='/committee/view-bids'>
                         <button className='btn btn-outline-success btn-md' onClick={(()=> onClick (tender._id))} >View Bids</button>
-                        </Link>
                     </td>
                     </tr>
                 ))
@@ -71,6 +80,10 @@ const CommitteeHome = () => {
              </tbody>
            
             </table>
+                            </>
+                        }
+                    </>
+                }
             </div>
         </div>
     )

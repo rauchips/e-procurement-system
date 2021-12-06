@@ -9,21 +9,23 @@ const EntityHome = () => {
     const history = useHistory ()
     const [user,setUser] = useState(JSON.parse(localStorage.getItem('entityprofile')));
     useEffect (() => {
-        // const token =user?.token;
         setUser(JSON.parse(localStorage.getItem('entityprofile')))
     },[location])
 
     const [data,setData] = useState ([]);
+    const [isLoading,setIsLoading] = useState(false)
     useEffect (() => {
         getData ()
     },[])
 
     const getData = async () => {
         try {
+            setIsLoading(true)
             const response = await fetch (`http://localhost:5000/api/government/tender/${user.json.result._id}`)
             const result = await response.json ()
             console.log(result)
             setData(result)
+            setIsLoading(false)
         } catch (error) {
             console.log(error)
         }
@@ -36,6 +38,10 @@ const EntityHome = () => {
         localStorage.removeItem('member')
     }
 
+    const onClose = (id) => {
+
+    }
+
     return (
         <div>
             <EntityNavbar/>
@@ -45,7 +51,13 @@ const EntityHome = () => {
             <button className="btn-outline-primary btn-lg" onClick={onClick} >Create new Tender + </button>
             </div>
             <div className="container mt-5">
-            <table className="table table-bordered">
+                {
+                    isLoading?<div className='loader'></div>:
+                    <div>
+                        {
+                            data.length === 0? <h6 className="mt-5 text-center mb-3 display-6 text-primary">No tenders have been made.</h6>:
+                            <>
+                                 <table className="table table-bordered">
             <thead>
                 <tr>
                 <th scope="col">Tender Title</th>
@@ -53,7 +65,9 @@ const EntityHome = () => {
                 <th scope="col">Closing Date</th>
                 <th scope="col">Status</th>
                 <th scope="col">Document</th>
+                <th scope="col">Bids</th>
                 <th scope="col">Committee</th>
+                <th scope="col">Actions</th>
                 </tr>
             </thead>
             {
@@ -62,7 +76,7 @@ const EntityHome = () => {
                     <td>{tender.title} </td>
                     <td>{new Date(tender.createdAt).toLocaleDateString(undefined, options)}</td>
                     <td>{new Date(tender.closingAt).toLocaleDateString(undefined, options)} </td>
-                    {tender.status === true? <td>True</td>:<td>False</td> }
+                    {tender.status === true? <td>Active</td>:<td>Closed</td> }
                     <td>
                         {tender.filename}
                         <a href= {`../../../public/uploads/${tender.filename}`} download><i className='fa fa-download'></i></a>
@@ -83,12 +97,24 @@ const EntityHome = () => {
                         tender.committee.length === 0?  
                     <td>
                         <Link to = '/government/committee-members'>
-                        <button className='btn btn-info btn-md' onClick={(() => localStorage.setItem("tenderId", JSON.stringify(tender._id)) )}>Add</button>
+                        <button className='btn btn-primary btn-md' onClick={(() => localStorage.setItem("tenderId", JSON.stringify(tender._id)) )}>Add member</button>
                         </Link>
                     </td>
                     :  
                     <td>
-                        <button className='btn btn-info btn-md' disabled ={true}>already exists</button>
+                        <button className='btn btn-primary btn-md' disabled ={true}>already exists</button>
+                    </td>
+                    }
+                    {
+                        tender.committee.length > 0 ?  
+                    <td>
+                        <Link to = '/government/committee-members'>
+                        <button className='btn btn-primary btn-md' >Close</button>
+                        </Link>
+                    </td>
+                    :  
+                    <td>
+                        <button className='btn btn-primary btn-md' disabled ={true}>close</button>
                     </td>
                     }
 
@@ -98,6 +124,11 @@ const EntityHome = () => {
             <tbody>
             </tbody>
             </table>
+                            </>
+                        }
+                    </div>
+                }
+
             </div>
         </div>
     )

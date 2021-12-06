@@ -14,6 +14,7 @@ const SupplierHome = () => {
 
 
     const [tendersData,setTendersData] = useState ([])
+    const [isLoading,setIsLoading] = useState(false)
 
     useEffect (() => {
         getData ()
@@ -21,11 +22,12 @@ const SupplierHome = () => {
 
     const getData = async () => {
         try {
+            setIsLoading(true)
         const response = await fetch ("http://localhost:5000/api/admin/tenders")
         const result = await response.json ()
         console.log(result)
         setTendersData(result.body)
-        return result.body
+        setIsLoading(false)
         } catch (error) {
             console.log(error)
         }
@@ -43,7 +45,13 @@ const SupplierHome = () => {
             <SupplierNavbar/>
             <h5 className="mt-5 text-center mb-3">Welcome, {user.json.result.company} Company</h5>
             <div className="container mt-5">
-            <table className="table table-bordered">
+                {
+                    isLoading?<div className="loader"></div>:
+                    <>
+                        {
+                            tendersData.length===0?<h6 className="mt-5 text-center mb-3 display-6 text-primary">No tenders have been made.</h6>:
+                            <>
+                                <table className="table table-bordered">
             <thead>
                 <tr>
                 <th scope="col">Title</th>
@@ -81,6 +89,11 @@ const SupplierHome = () => {
                 ))
             }
             </table>
+                            </>
+                        }
+                    </>
+                }
+            
             </div>
         </div>
     )

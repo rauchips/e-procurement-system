@@ -1,5 +1,6 @@
 .navbar {
     padding: 20px;
+    background-color:#bfbbc2 !important ;
 }
 .navbar-nav {
     margin-left: 20%;
@@ -8,7 +9,14 @@
     padding: 20px;
 }
 .nav-link {
-    border-radius: 10px;
-    border-width: 0px;
     padding: 5px;
+    font-size: 18px;
+    color:#000000 !important;
+}
+.btn {
+    color:white !important;
+}
+.navbar-brand {
+    color:#fc0000 !important;
+    font-weight: 500;
 }

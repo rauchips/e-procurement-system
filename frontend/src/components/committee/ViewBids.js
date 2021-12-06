@@ -8,6 +8,7 @@ const ViewBids = () => {
     const location = useLocation ();
     const history = useHistory ();
     const [data,setData] = useState([]);
+    const [isLoading,setIsLoading] = useState (false)
     const [tenderId,setTenderId] = useState(JSON.parse(localStorage.getItem('tenderId')));
     useEffect (() => {
         // const token =user?.token;
@@ -20,22 +21,31 @@ const ViewBids = () => {
 
     const getData = async () => {
         try {
+            setIsLoading(true)
             const response = await fetch ("http://localhost:5000/api/admin/bids")
             const result = await response.json()
             console.log(result)
             setData(result.body)
+            setIsLoading (false)
         } catch (error) {
             console.log(error)
         }
     }
     const onClick = (id) => {
         axios.patch(`http://localhost:5000/api/committee/bid/${id}`)
+        history.push('/committee/view-bids')
     }
     return (
         <div>
             <CommitteeNavbar/>
             <div className="container mt-5 committee">
-                <h5 className="text-center mb-3"> These are the bids made for this tender.</h5>
+                {
+                    isLoading? <div className="loader"></div>:
+                    <>
+                        {
+                            data.length === 0 ? <h6 className="mt-5 text-center mb-3 display-4 text-primary">Currently there are no bids for this tender.</h6>:
+                            <>
+                                <h5 className="text-center mb-3"> These are the bids made for this tender.</h5>
                 <table className="table table-bordered">
             <thead>
                 <tr>
@@ -88,6 +98,11 @@ const ViewBids = () => {
              </tbody>
            
             </table>
+                            </>
+                        }
+                    </>
+                }
+                
             </div>
         </div>
     )

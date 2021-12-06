@@ -75,26 +75,26 @@ const  CommitteeSign = () => {
                             <div className="card">
                                 <div className="mb-3">
                                     <label for="exampleInputEmail1"  className="form-label">Name</label>
-                                    <input onChange={handleChange} type="text" name="name"  className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+                                    <input required onChange={handleChange} type="text" name="name"  className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
                                 </div>
                                 <div className="mb-3">
                                     <label for="exampleInputPassword1"  className="form-label">Telephone</label>
-                                    <input onChange={handleChange} type="text" name="telephone" className="form-control" id="exampleInputPassword1"/>
+                                    <input required onChange={handleChange} type="text" name="telephone" className="form-control" id="exampleInputPassword1"/>
                                 </div>
                                 <div className="mb-3">
                                     <label for="exampleInputEmail1"  className="form-label">Email</label>
-                                    <input onChange={handleChange} type="email" name="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+                                    <input required onChange={handleChange} type="email" name="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
                                 </div>
                                 <div className="mb-3">
                                     <label for="exampleInputPassword1"  className="form-label">Password</label>
-                                    <input onChange={handleChange} type="password" name="password" className="form-control" id="exampleInputPassword1"/>
+                                    <input required onChange={handleChange} type="password" name="password" className="form-control" id="exampleInputPassword1"/>
                                 </div>
                             </div>
+                            <div className="text-center mt-3">
+                                <button type="submit" className="btn btn-primary btn-md">Register</button>
+                            </div>
                     <div className="text-center mt-3">
-                        <button type="submit" className="btn btn-outline btn-md" onClick={switchMode} >Already have an account? Click here to Login</button>
-                    </div>
-                    <div className="text-center mt-3">
-                        <button type="submit" className="btn btn-primary btn-md">Register</button>
+                        <button type="submit" className="btn btn-dark btn-md" onClick={switchMode} >Already have an account? Click here to Login</button>
                     </div>
                 </form>
                 </div>
@@ -105,17 +105,17 @@ const  CommitteeSign = () => {
                         <form onSubmit={onSubmit}>
                             <div className="mb-3">
                                 <label for="exampleInputPassword1"  className="form-label">Email</label>
-                                <input onChange={handleChange} type="email" name="email" className="form-control" id="exampleInputPassword1"/>
+                                <input required onChange={handleChange} type="email" name="email" className="form-control" id="exampleInputPassword1"/>
                             </div>
                             <div className="mb-3">
                                 <label for="exampleInputPassword1"  className="form-label">Password</label>
-                                <input onChange={handleChange} type="password" name="password" className="form-control" id="exampleInputPassword1"/>
-                            </div>
-                            <div className="text-center mt-3">
-                                <button type="submit" className="btn btn-outline btn-md " onClick={switchMode}>Don't have an account? Click here to register</button>
+                                <input required onChange={handleChange} type="password" name="password" className="form-control" id="exampleInputPassword1"/>
                             </div>
                             <div className="text-center mt-3">
                                 <button type="submit" className="btn btn-primary btn-md">Login</button>
+                            </div>
+                            <div className="text-center mt-3">
+                                <button type="submit" className="btn btn-dark btn-md " onClick={switchMode}>Don't have an account? Click here to register</button>
                             </div>
                         </form>
                     </div>

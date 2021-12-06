@@ -93,19 +93,15 @@ const  SupplierSign = () => {
                             <h5 className="text-center">Vendor</h5>
                                 <div className="mb-3">
                                     <label for="exampleInputEmail1"  className="form-label">Company Name</label>
-                                    <input onChange={handleChange} type="text" name="company"  className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+                                    <input required onChange={handleChange} type="text" name="company"  className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
                                 </div>
                                 <div className="mb-3">
                                     <label for="exampleInputPassword1"  className="form-label">Telephone</label>
-                                    <input onChange={handleChange} type="text" name="telephone" className="form-control" id="exampleInputPassword1"/>
+                                    <input required onChange={handleChange} type="text" name="telephone" className="form-control" id="exampleInputPassword1"/>
                                 </div>
                                 <div className="mb-3">
                                     <label for="exampleInputPassword1"  className="form-label">Postal Address</label>
-                                    <input onChange={handleChange} type="text" name="address" className="form-control" id="exampleInputPassword1"/>
-                                </div>
-                                <div className="mb-3">
-                                    <label for="exampleInputPassword1"  className="form-label">DOR</label>
-                                    <input onChange={handleChange} type="text" name="DOR" className="form-control" id="exampleInputPassword1"/>
+                                    <input required onChange={handleChange} type="text" name="address" className="form-control" id="exampleInputPassword1"/>
                                 </div>
                             </div>
                         </div>
@@ -114,25 +110,26 @@ const  SupplierSign = () => {
                             <h5 className="text-center">Vendor Representative</h5>
                                 <div className="mb-3">
                                     <label for="exampleInputEmail1"  className="form-label">Name</label>
-                                    <input onChange={handleChange} type="text" name="name" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+                                    <input required onChange={handleChange} type="text" name="name" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
                                 </div>
                                 <div className="mb-3">
                                     <label for="exampleInputPassword1"  className="form-label">Email</label>
-                                    <input onChange={handleChange} type="email" name="email" className="form-control" id="exampleInputPassword1"/>
+                                    <input required onChange={handleChange} type="email" name="email" className="form-control" id="exampleInputPassword1"/>
                                 </div>
                                 <div className="mb-3">
                                     <label for="exampleInputPassword1"  className="form-label">Password</label>
-                                    <input onChange={handleChange} type="password" name="password" className="form-control" id="exampleInputPassword1"/>
+                                    <input required onChange={handleChange} type="password" name="password" className="form-control" id="exampleInputPassword1"/>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="text-center mt-3">
-                        <button type="submit" className="btn btn-outline btn-md" onClick={switchMode} >Already have an account? Click here to Login</button>
-                    </div>
-                    <div className="text-center mt-3">
                         <button type="submit" className="btn btn-primary btn-md">Register</button>
                     </div>
+                    <div className="text-center mt-3">
+                        <button type="submit" className="btn btn-dark btn-md" onClick={switchMode} >Already have an account? Click here to Login</button>
+                    </div>
+
                 </form>
                 </>
                 :<>
@@ -141,17 +138,17 @@ const  SupplierSign = () => {
                         <form onSubmit={onSubmit}>
                             <div className="mb-3">
                                 <label for="exampleInputPassword1"  className="form-label">Email</label>
-                                <input onChange={handleChange} type="email" name="email" className="form-control" id="exampleInputPassword1"/>
+                                <input required onChange={handleChange} type="email" name="email" className="form-control" id="exampleInputPassword1"/>
                             </div>
                             <div className="mb-3">
                                 <label for="exampleInputPassword1"  className="form-label">Password</label>
-                                <input onChange={handleChange} type="password" name="password" className="form-control" id="exampleInputPassword1"/>
-                            </div>
-                            <div className="text-center mt-3">
-                                <button type="submit" className="btn btn-outline btn-md " onClick={switchMode}>Don't have an account? Click here to register</button>
+                                <input required onChange={handleChange} type="password" name="password" className="form-control" id="exampleInputPassword1"/>
                             </div>
                             <div className="text-center mt-3">
                                 <button type="submit" className="btn btn-primary btn-md">Login</button>
+                            </div>
+                            <div className="text-center mt-3">
+                                <button type="submit" className="btn btn-dark btn-md " onClick={switchMode}>Don't have an account? Click here to register</button>
                             </div>
                         </form>
                     </div>
