@@ -33,7 +33,7 @@ exports.postVendor = async (req, res, next) => {
       }
     } = req.body;
 
-    let data = await Vendor.findOne({ company })
+    let data = await Vendor.findOne({ 'representative.name': req.body.representative.name })
     if(data) return res.json({ message: 'Vendor already exists' })
     
     let newVendor = new Vendor(req.body)

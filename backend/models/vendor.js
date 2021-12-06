@@ -5,7 +5,6 @@ const vendorSchema = mongoose.Schema({
   company: String,
   telephone: String,
   address: String,
-  DOR: String,
   representative: {
     name: String,
     email: String,

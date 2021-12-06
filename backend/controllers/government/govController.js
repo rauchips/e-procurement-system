@@ -36,7 +36,7 @@ exports.postEntity = async (req, res, next) => {
       }
     } = req.body;
 
-    let data = await Gov.findOne({ entity })
+    let data = await Gov.findOne({ 'representative.name': req.body.representative.name })
     if(data) return res.json({ message: 'Government Entity already exists' })
     
     let newEntity = new Gov(req.body)
