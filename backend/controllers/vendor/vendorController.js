@@ -110,13 +110,14 @@ exports.makeBid = async (req, res, next) => {
     await Bid.findOne({ 'vendor': req.params.id })
       .then((bid) => {
         if(bid !== null) return res.json({ message: 'A bid for this tender already exists in the database' })
+
         let newFile = new Bid({
           filename: req.file.filename,
           vendor: req.params.id,
           tenders:req.body.tenders
           
         })
-        console.log(newFile)
+        
         newFile.save()
           .then((result) => res.status(201).json(result))
           .catch(err => console.error(err))
