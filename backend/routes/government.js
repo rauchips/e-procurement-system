@@ -28,20 +28,13 @@ router.route('/login')
 router.route('/tender/:id')
   .get(govController.getTender)
   .post(upload.single('tender'),govController.makeTender)
-
-
-//add committee by patching
-router.route('/committee/:id')
-  .patch(govController.patchCommittee)
-
-  // .patch(govController.closeTender)
+  .patch(govController.closeTender)
 
 /*
-  UPLOAD TENDER DOCUMENT BY ID
+  ASSIGN COMMITTEE MEMBERS TO TENDER BY ID
 */
 
-router.route('/upload/:id')
-  .get(govController.getUpload)
-  .post(upload.single('tender'),govController.uploadTender)
+router.route('/committee/:id')
+  .patch(govController.patchCommittee)
 
 module.exports = router;
