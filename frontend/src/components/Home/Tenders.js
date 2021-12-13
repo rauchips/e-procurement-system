@@ -1,5 +1,6 @@
 import React,{useEffect,useState} from "react";
 import Navbar from "../Navbar/Navbar"
+import svg from "./images.jpg"
 
 
 const Tenders = () => {
@@ -28,7 +29,10 @@ const Tenders = () => {
                 isLoading?<div className="loader"></div>:
                 <>
                      {
-                    tendersData.length===0?<h6 className="mt-5 text-center mb-3 display-4 text-primary">No tenders have been made.</h6>
+                    tendersData.length===0?
+                    <>
+                        <h6 className="mt-5 text-center mb-3 display-6 text-primary">No tenders have been made.</h6>
+                    </>
                     :
                     <div className="container mt-5">
                     <table className="table table-bordered">

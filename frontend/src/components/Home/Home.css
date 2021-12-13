@@ -3,6 +3,22 @@
     color: #000000;
 }
 .about {
-    padding: 30px;
+    padding: 40px;
+    border-radius: 20px;
+    background-color: black;
+    color: cyan;
+}
+.about h3 {
+    color: white;
+    margin-bottom: 50px;
+}
+.about h6 {
+    color: white;
+    margin-bottom: 30px;
+}
+.about .btn {
+    margin: 20px;
+}
+.about img {
     border-radius: 20px;
 }

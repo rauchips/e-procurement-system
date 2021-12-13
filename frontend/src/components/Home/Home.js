@@ -1,28 +1,76 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import Navbar from "../Navbar/Navbar";
 import "./Home.css"
 const Home = () => {
+    const [tendersData,setTendersData] = useState ([])
+    const [committeeData,setCommitteeData] = useState ([])
+    const [vendorData,setVendorData] = useState ([])
+    const [entityData,setEntityData] = useState ([])
+
+
+
+
+    useEffect (() => {
+        getTenderData ()
+        getCommitteeData ()
+        getVendorData ()
+        getEntityData ()
+
+
+
+    },[])
+
+    const getTenderData = async () => {
+        const response = await fetch ("http://localhost:5000/api/admin/tenders")
+        const result = await response.json ()
+        console.log(result)
+        setTendersData(result.count)
+    }
+
+    const getCommitteeData = async () => {
+        const response = await fetch ("http://localhost:5000/api/admin/committees")
+        const result = await response.json ()
+        console.log(result)
+        setCommitteeData(result.count)
+    }
+
+    const getVendorData = async () => {
+        const response = await fetch ("http://localhost:5000/api/admin/vendors")
+        const result = await response.json ()
+        console.log(result)
+        setVendorData(result.count)
+    }
+
+    const getEntityData = async () => {
+        const response = await fetch ("http://localhost:5000/api/admin/governments")
+        const result = await response.json ()
+        console.log(result)
+        setEntityData(result.count)
+    }
     return (
         <>
        <Navbar/>
         <div className="container-fluid home-fluid">
             <div className="container about">
-                <h5 className="text-center mb-3">Who we are</h5>
-                <p className="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-    molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-    numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
-    optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
-    obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
-    nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
-    tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,
-    quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos 
-    sapiente officiis modi at sunt excepturi expedita sint? Sed quibusdam
-    recusandae alias error harum maxime adipisci amet laborum. Perspiciatis 
-    minima nesciunt dolorem! Officiis iure rerum voluptates a cumque velit 
-    quibusdam sed amet tempora. Sit laborum ab, eius fugit doloribus tenetur 
-    fugiat, temporibus enim commodi iusto libero magni deleniti quod quam 
-    consequuntur! Commodi minima excepturi repudiandae velit hic maxime</p>
-        </div>
+                <h3 className='text-center mb-4'>Welcome to GOK procurement system</h3>
+                <div className='row padding'>
+                    <div className='col-md-12 col-lg-6 col-sm-12'>
+                        <h6>Welcome to our e-procurement portal</h6>
+                        <p className='lead'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
+obcaecati tenetur iure eius earum ut molestias architecto</p>
+                    <div className='home-buttons'>
+                        <button className = "btn btn-primary btn-md">Donor</button>
+                        <button className = "btn btn-primary btn-md">Donee</button>
+                    </div>
+                    </div>
+                    <div className='col-lg-6'>
+                    <img class="img-fluid" src="https://images.pexels.com/photos/186461/pexels-photo-186461.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt=""/>
+                    </div>
+                </div>
+            </div>
         <div className="container">
         <h5 className="text-center mt-4 mb-4">Summary Statistics</h5>
         <table class="table">
@@ -37,21 +85,9 @@ const Home = () => {
             <tbody>
                 <tr>
                 <th scope="row">2021/2022</th>
-                <td>500</td>
-                <td>30</td>
-                <td>900</td>
-                </tr>
-                <tr>
-                <th scope="row">2020/2021</th>
-                <td>789</td>
-                <td>34</td>
-                <td>1200</td>
-                </tr>
-                <tr>
-                <th scope="row">2019/2020</th>
-                <td >600</td>
-                <td>30</td>
-                <td>800</td>
+                <td>{tendersData}</td>
+                <td>{entityData}</td>
+                <td>{vendorData}</td>
                 </tr>
             </tbody>
         </table>
