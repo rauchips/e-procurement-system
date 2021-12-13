@@ -6,9 +6,21 @@ import {Bar,Pie,Line} from "react-chartjs-2"
 
 const AdminHome = () => {
     const [tendersData,setTendersData] = useState ([])
+    const [committeeData,setCommitteeData] = useState ([])
+    const [vendorData,setVendorData] = useState ([])
+    const [entityData,setEntityData] = useState ([])
+
+
+
 
     useEffect (() => {
         getTenderData ()
+        getCommitteeData ()
+        getVendorData ()
+        getEntityData ()
+
+
+
     },[])
 
     const getTenderData = async () => {
@@ -17,11 +29,6 @@ const AdminHome = () => {
         console.log(result)
         setTendersData(result.count)
     }
-    const [committeeData,setCommitteeData] = useState ([])
-
-    useEffect (() => {
-        getCommitteeData ()
-    },[])
 
     const getCommitteeData = async () => {
         const response = await fetch ("http://localhost:5000/api/admin/committees")
@@ -29,11 +36,6 @@ const AdminHome = () => {
         console.log(result)
         setCommitteeData(result.count)
     }
-    const [vendorData,setVendorData] = useState ([])
-
-    useEffect (() => {
-        getVendorData ()
-    },[])
 
     const getVendorData = async () => {
         const response = await fetch ("http://localhost:5000/api/admin/vendors")
@@ -41,11 +43,6 @@ const AdminHome = () => {
         console.log(result)
         setVendorData(result.count)
     }
-    const [entityData,setEntityData] = useState ([])
-
-    useEffect (() => {
-        getEntityData ()
-    },[])
 
     const getEntityData = async () => {
         const response = await fetch ("http://localhost:5000/api/admin/governments")
