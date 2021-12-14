@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from 'react';
+import { Link } from 'react-router-dom';
 import Navbar from "../Navbar/Navbar";
 import "./Home.css"
 const Home = () => {
@@ -62,8 +63,12 @@ numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
 optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
 obcaecati tenetur iure eius earum ut molestias architecto</p>
                     <div className='home-buttons'>
-                        <button className = "btn btn-primary btn-md">Donor</button>
-                        <button className = "btn btn-primary btn-md">Donee</button>
+                        <Link to='/government/sign'>
+                        <button className = "btn btn-primary btn-md">Entity</button>
+                        </Link>
+                        <Link to='/supplier/sign'>
+                        <button className = "btn btn-primary btn-md">Supplier</button>
+                        </Link>
                     </div>
                     </div>
                     <div className='col-lg-6'>
