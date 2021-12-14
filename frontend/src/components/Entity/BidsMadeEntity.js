@@ -57,8 +57,12 @@ const BidsMadeEntity = () => {
         <tbody>
         
         {data.map(bid => (
+           
                 <>
                 {
+                    bid.tenders === null? <h5 className='text-center mb-4'>No bids made for this tender</h5>:
+                    <>
+                    {
                     tenderId === bid.tenders._id?
                     <>
                           <tr>
@@ -81,6 +85,9 @@ const BidsMadeEntity = () => {
                     </>:
                     <h5>No bids made for this tender</h5>
                 }
+                    </>
+                }
+                
                 </>
               
             ))

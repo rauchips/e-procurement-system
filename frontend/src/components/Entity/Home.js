@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import EntityNavbar from "./Navbar";
+import axios from "axios"
 
 
 const EntityHome = () => {
@@ -38,8 +39,9 @@ const EntityHome = () => {
         localStorage.removeItem('member')
     }
 
-    const onClose = (id) => {
-
+    const onClose = () => {
+        axios.patch (`http://localhost:5000/api/government/tender/${user.json.result._id}`)
+        history.go(0)
     }
 
     return (
@@ -70,13 +72,16 @@ const EntityHome = () => {
                 <th scope="col">Actions</th>
                 </tr>
             </thead>
+            <tbody>
+
             {
                 data.map (tender => (
                     <>
+                    <tr>
                     <td>{tender.title} </td>
                     <td>{new Date(tender.createdAt).toLocaleDateString(undefined, options)}</td>
                     <td>{new Date(tender.closingAt).toLocaleDateString(undefined, options)} </td>
-                    {tender.status === true? <td>Active</td>:<td>Closed</td> }
+                    {tender.status === false? <td>Active</td>:<td>Closed</td> }
                     <td>
                         {tender.filename}
                         <a href= {`../../../public/uploads/${tender.filename}`} download><i className='fa fa-download'></i></a>
@@ -106,22 +111,20 @@ const EntityHome = () => {
                     </td>
                     }
                     {
-                        tender.committee.length > 0 ?  
+                        tender.committee.length > 0 && tender.status === false ?  
                     <td>
-                        <Link to = '/government/committee-members'>
-                        <button className='btn btn-primary btn-md' >Close</button>
-                        </Link>
+                        <button className='btn btn-danger btn-md' onClick={(() => onClose)} >Close</button>
                     </td>
                     :  
                     <td>
-                        <button className='btn btn-primary btn-md' disabled ={true}>close</button>
+                        <button className='btn btn-danger btn-md' disabled ={true}>close</button>
                     </td>
+                    
                     }
-
+                    </tr>
                     </>
                 ) )
             }
-            <tbody>
             </tbody>
             </table>
                             </>
