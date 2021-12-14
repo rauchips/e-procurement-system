@@ -79,11 +79,18 @@ const SupplierHome = () => {
                         <a href= {`../../../public/uploads/${tender.filename}`} download><i className='fa fa-download'></i></a>
                 </td>
                 <td>
-                    <div style={{display:"flex"}}>
+                {
+                    tender.status === false?<div style={{display:"flex"}}>
                     <div className="m-2">
                         <button  onClick = {(() => onClick(tender._id,tender.title))} className="btn btn-md btn-success">Bid</button>
                     </div>
+                    </div>:<div style={{display:"flex"}}>
+                    <div className="m-2">
+                        <button disabled={true} className="btn btn-md btn-danger">Closed</button>
                     </div>
+                    </div>
+                }
+                    
                     
                 </td>
                 </tr>
