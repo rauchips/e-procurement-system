@@ -43,7 +43,9 @@ const SupplierHome = () => {
     return (
         <div>
             <SupplierNavbar/>
-            <h5 className="mt-5 text-center mb-3">Welcome, {user.json.result.company} Company, you can make bid to this tenders</h5>
+            <h5 className="mt-5 text-center mb-3">Welcome, {user.json.result.company} Company</h5>
+            <h5 className=" mb-3" style={{marginLeft:"130px"}} >You can place bids to the following tenders</h5>
+
             <div className="container mt-5">
                 {
                     isLoading?<div className="loader"></div>:
