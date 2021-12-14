@@ -31,6 +31,7 @@ const MakeBid = () => {
         formData.set("tenders",tenderId.id)
         axios.post(`http://localhost:5000/api/vendor/bid/${user.json.result._id}`,formData)
         .then((data) => console.log(data))
+        alert ("the bid has been uploaded successfully")
         history.push('/supplier/home')
         localStorage.removeItem ("tenderId")
         localStorage.removeItem ("tendername")
