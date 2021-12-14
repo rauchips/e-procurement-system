@@ -74,8 +74,7 @@ const BidsMade = () => {
                 </td>
                  
                 </tr>
-                    </>:
-                    <h5>You have not made any bid</h5>
+                    </>:""
                 }
                 </>
               

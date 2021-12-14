@@ -26,16 +26,12 @@ const SupplierNavbar = () => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                    <Link to = '/supplier/home'>
                     <li className="nav-item">
-                        <button className='btn btn-secondary nav-link btn-sm'>Home</button>
+                        <a className='btn btn-secondary nav-link btn-sm' href='/supplier/home' >Home</a>
                     </li>
-                    </Link>
-                    <Link to = '/supplier/bids-made'>
                     <li className="nav-item">
-                    <button className='btn btn-secondary nav-link btn-sm'>Bids made</button>
+                    <a className='btn btn-secondary nav-link btn-sm' href='/supplier/bids-made' >Bids made</a>
                     </li>
-                    </Link>
                 
                 </ul>
                 <div  style={{marginRight:"80px",display:"flex"}}>
