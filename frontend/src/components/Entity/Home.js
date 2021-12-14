@@ -113,7 +113,7 @@ const EntityHome = () => {
                     {
                         tender.committee.length > 0 && tender.status === false ?  
                     <td>
-                        <button className='btn btn-danger btn-md' onClick={(() => onClose)} >Close</button>
+                        <button className='btn btn-danger btn-md' onClick={(()=>onClose)} >Close</button>
                     </td>
                     :  
                     <td>

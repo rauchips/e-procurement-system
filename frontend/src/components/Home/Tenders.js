@@ -43,6 +43,7 @@ const Tenders = () => {
                         <th scope="col">Representative Name</th>
                         <th scope="col">Representative Email</th>
                         <th scope="col">Status</th>
+                        <th scope="col">Document</th>
                         </tr>
                     </thead>
                     {
@@ -54,8 +55,12 @@ const Tenders = () => {
                         <td>{tender.rep.representative.name}</td>
                         <td>{tender.rep.representative.email}</td>
                         {
-                            tender.status === false?<td>Active</td>:<td>Inactive</td>
+                            tender.status === false?<td>Active</td>:<td>Closed</td>
                         }
+                        <td>
+                        {tender.filename}
+                        <a href= {`../../../public/uploads/${tender.filename}`} download><i className='fa fa-download'></i></a>
+                    </td>
                         </tr>
                     </tbody>
                         ))
