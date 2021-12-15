@@ -59,7 +59,7 @@ const Tenders = () => {
                         }
                         <td>
                         {tender.filename}
-                        <a href= {`../../../public/uploads/${tender.filename}`} download><i className='fa fa-download'></i></a>
+                        <a href= {`../../../../../../../../../../../../Users/User/OneDrive/Desktop/react/e-procurement-system/dist/uploadTender/${tender.filename}`} download><i className='fa fa-download'></i></a>
                     </td>
                         </tr>
                     </tbody>

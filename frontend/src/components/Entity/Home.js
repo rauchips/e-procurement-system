@@ -57,7 +57,7 @@ const EntityHome = () => {
                     isLoading?<div className='loader'></div>:
                     <div>
                         {
-                            data.length === 0? <h6 className="mt-5 text-center mb-3 display-6 text-primary">No tenders have been made.</h6>:
+                            data.length === 0? <h6 className="mt-5 text-center mb-3 display-6 text-primary">You have not made any tender.</h6>:
                             <>
                                  <table className="table table-bordered">
             <thead>
