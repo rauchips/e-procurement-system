@@ -4,7 +4,7 @@ const multer = require('multer');
 
 const multerStorage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, '../dist/uploadTender')
+    cb(null, '../frontend/public/uploadTender')
   },
   filename: (req, file, cb) => {
     const filename = file.originalname.toLowerCase()

@@ -1,7 +1,6 @@
 import React,{useEffect,useState} from "react";
 import Navbar from "../Navbar/Navbar"
-import svg from "./images.jpg"
-
+import {Link} from "react-router-dom"
 
 const Tenders = () => {
     const [tendersData,setTendersData] = useState ([])
@@ -59,7 +58,7 @@ const Tenders = () => {
                         }
                         <td>
                         {tender.filename}
-                        <a href= {`../../../../../../../../../../../../Users/User/OneDrive/Desktop/react/e-procurement-system/dist/uploadTender/${tender.filename}`} download><i className='fa fa-download'></i></a>
+                        <a  download =  {`../../../../../../../../../../../../Users/User/OneDrive/Desktop/react/e-procurement-system/dist/uploadTender/${tender.filename}`}><i className='fa fa-download'></i></a>
                     </td>
                         </tr>
                     </tbody>

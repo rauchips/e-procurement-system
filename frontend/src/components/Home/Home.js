@@ -57,11 +57,7 @@ const Home = () => {
                 <div className='row padding'>
                     <div className='col-md-12 col-lg-6 col-sm-12'>
                         <h6>Welcome to our e-procurement portal</h6>
-                        <p className='lead'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
-optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
-obcaecati tenetur iure eius earum ut molestias architecto</p>
+                        <p className='lead'>Welcome to the government of Kenya e-procurement website where we facilitate an efficient, transparent, non-discriminating, and accountable public procurement process that is to the benefit of the people of Kenya.</p>
                     <div className='home-buttons'>
                         <Link to='/government/sign'>
                         <button className = "btn btn-primary btn-md">Entity</button>

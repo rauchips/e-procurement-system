@@ -17,6 +17,6 @@
     color:white !important;
 }
 .navbar-brand {
-    color:#fc0000 !important;
-    font-weight: 500;
+    height: 70px;
+    border-radius: 30px;
 }
