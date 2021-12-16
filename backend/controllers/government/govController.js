@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 
 const Gov = require('../../models/government');
 const Tender = require('../../models/tender');
+const Bid = require('../../models/bid');
 
 /* 
   REGISTER GOVERNMENT ENTITY 
@@ -124,6 +125,39 @@ exports.closeTender = async (req, res, next) => {
     await Tender.updateOne({ rep: req.params.id },{ $set: { status: true } })
       .then(result => {
         if(!result) return res.json({ message: 'This Tender is not related to the Government Entity' })
+        return res.status(200).json(result)
+      })
+      .catch(err => res.json(err))
+      
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+}
+
+/* 
+  GET AND ACCEPT BID BY ID SETUP
+*/
+
+exports.getBid = async (req, res, next) => {
+  try {
+    let bid = await Bid.find({ _id : req.params.id })
+      .populate('tenders')
+      .populate('vendor')
+    return res.json(bid)
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+}
+
+
+exports.acceptBid = async (req, res, next) => {
+  try {
+
+    await Bid.updateOne({ _id: req.params.id },{ $set: { accepted: true } })
+      .then(result => {
+        if(!result) return res.json({ message: 'This Bid is not related to the Government Entity' })
         return res.status(200).json(result)
       })
       .catch(err => res.json(err))

@@ -30,6 +30,14 @@ router.route('/tender/:id')
   .post(upload.single('tender'),govController.makeTender)
   .patch(govController.closeTender)
 
+/* 
+  GET AND ACCEPT BID BY ID SETUP
+*/
+
+router.route('/bid/:id')
+  .get(govController.getBid)
+  .patch(govController.acceptBid)
+
 /*
   ASSIGN COMMITTEE MEMBERS TO TENDER BY ID
 */

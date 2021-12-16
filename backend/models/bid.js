@@ -6,6 +6,10 @@ const bidSchema = mongoose.Schema({
     type: Boolean,
     default: false
   },
+  accepted: {
+    type: Boolean,
+    default: false
+  },
   vendor:{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'vendors'
