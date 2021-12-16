@@ -1,8 +1,10 @@
+import axios from 'axios';
 import React,{useState,useEffect} from 'react'
-import {useLocation } from 'react-router-dom';
+import {useHistory, useLocation } from 'react-router-dom';
 import CommitteeNavbar from './Navbar';
 
 const BidsMadeEntity = () => {
+    const history = useHistory()
     const options = { year: "numeric", month: "long", day: "numeric",hour: '2-digit', minute: '2-digit' }
     const location = useLocation ();
     const [data,setData] = useState([]);
@@ -29,6 +31,14 @@ const BidsMadeEntity = () => {
         // const token =user?.token;
         setTenderId(JSON.parse(localStorage.getItem('tenderId')))
     },[location])
+    const onAccept = (id) => {
+        axios.patch(`http://localhost:5000/api/government/bid/${id}`)
+        history.go(0)
+    }
+    const onDecline = (id) => {
+        axios.patch(`http://localhost:5000/api/government/bid/decline/${id}`)
+        history.go(0)
+    }
     return (
         <div>
         <CommitteeNavbar/>
@@ -77,9 +87,30 @@ const BidsMadeEntity = () => {
                     {bid.filename}
                     <a href= {`../../../public/uploads/${bid.filename}`} download><i className='fa fa-download'></i></a>
                 </td>
-                <td>
-                    <button className="btn btn-success btn-md">Accept</button>
-                </td>
+                {
+                    bid.accepted === true?
+                    <td>
+                    <button className="btn btn-success btn-md" disabled={true} >Accepted</button>
+                    </td>:
+                    <>
+                    {
+                        bid.declined ===true?
+                        <td>
+                        <button className="btn btn-danger btn-md" disabled={true}>Declined</button>
+                        </td>:
+                        <>
+                         <td>
+                            <button className="btn btn-success btn-md" onClick={(() => onAccept(bid._id))} >Accept</button>
+                        </td>
+                        <td>
+                            <button className="btn btn-danger btn-md" onClick={(() => onDecline(bid._id))} >Decline</button>
+                        </td>
+                        </>
+                    }
+                    </>
+                    
+
+                }
                  
                 </tr>
                     </>:

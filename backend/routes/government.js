@@ -38,6 +38,10 @@ router.route('/bid/:id')
   .get(govController.getBid)
   .patch(govController.acceptBid)
 
+  //decline bid
+  router.route ('/bid/decline/:id')
+  .patch(govController.declineBid)
+
 /*
   ASSIGN COMMITTEE MEMBERS TO TENDER BY ID
 */

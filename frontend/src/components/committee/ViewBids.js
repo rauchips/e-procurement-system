@@ -33,7 +33,7 @@ const ViewBids = () => {
     }
     const onClick = (id) => {
         axios.patch(`http://localhost:5000/api/committee/bid/${id}`)
-        history.push('/committee/view-bids')
+        history.go(0)
     }
     return (
         <div>
