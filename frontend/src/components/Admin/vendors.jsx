@@ -33,7 +33,7 @@ const AdminVendors = () => {
         <div>
             <AdminNavbar/>
             <div className="container mt-5">
-            <h5 className="text-center mb-4">Registered Vendors</h5>
+            <h5 className="text-center mb-4">Registered Suppliers</h5>
             <table class="table table-dark">
             <thead>
                 <tr>

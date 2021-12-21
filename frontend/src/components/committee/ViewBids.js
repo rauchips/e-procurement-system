@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React,{useState,useEffect} from 'react'
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation,Link } from 'react-router-dom';
 import CommitteeNavbar from './Navbar';
 
 const ViewBids = () => {
@@ -75,7 +75,7 @@ const ViewBids = () => {
                     </td>
                     <td>
                         {bid.filename}
-                        <a href= {`../../../public/uploads/${bid.filename}`} download><i className='fa fa-download'></i></a>
+                        <Link to={`/uploadBid/${bid.filename}`} target="_blank" download><i className='fa fa-download'></i></Link>
                     </td>
                     {bid.status === true?
                         <td>

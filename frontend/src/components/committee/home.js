@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react'
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation,Link } from 'react-router-dom';
 import CommitteeNavbar from './Navbar'
 import "./committee.css"
 
@@ -69,7 +69,7 @@ const CommitteeHome = () => {
                     </td>
                     <td>
                         {tender.filename}
-                        <a href= {`../../../public/uploads/${tender.filename}`} download><i className='fa fa-download'></i></a>
+                        <Link to={`/uploadTender/${tender.filename}`} target="_blank" download><i className='fa fa-download'></i></Link>
                 </td>
                     <td>
                         <button className='btn btn-outline-success btn-md' onClick={(()=> onClick (tender._id))} >View Bids</button>

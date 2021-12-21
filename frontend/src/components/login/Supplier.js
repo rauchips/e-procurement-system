@@ -92,8 +92,8 @@ const  SupplierLogin = () => {
             <p className=" text-center text-danger">{errors}</p>
             :""}
                 {isSignUp?
-                <h5 className="text-center mb-3">Vendor Registration</h5>
-                :<h5 className="text-center mb-3">Vendor Login</h5>}
+                <h5 className="text-center mb-3">Supplier Registration</h5>
+                :<h5 className="text-center mb-3">Supplier Login</h5>}
                 {isSignUp?
                 <>
                 <form onSubmit={onSubmit}>

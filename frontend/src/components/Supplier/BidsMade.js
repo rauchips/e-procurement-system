@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import { useLocation } from 'react-router-dom';
+import { useLocation,Link } from 'react-router-dom';
 import CommitteeNavbar from './Navbar';
 
 const BidsMade = () => {
@@ -70,7 +70,7 @@ const BidsMade = () => {
                 </td>
                 <td>
                     {bid.filename}
-                    <a href= {`../../../public/uploads/${bid.filename}`} download><i className='fa fa-download'></i></a>
+                    <Link to={`/uploadBid/${bid.filename}`} target="_blank" download><i className='fa fa-download'></i></Link>
                 </td>
                  
                 </tr>

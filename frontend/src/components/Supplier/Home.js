@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from "react";
 import SupplierNavbar from "./Navbar";
-import { useLocation,useHistory } from "react-router-dom";
+import { useLocation,useHistory,Link } from "react-router-dom";
 
 
 const SupplierHome = () => {
@@ -76,7 +76,7 @@ const SupplierHome = () => {
                 }
                  <td>
                         {tender.filename}
-                        <a href= {`../../../public/uploads/${tender.filename}`} download><i className='fa fa-download'></i></a>
+                        <Link to={`/uploadTender/${tender.filename}`} target="_blank" download><i className='fa fa-download'></i></Link>
                 </td>
                 <td>
                 {
