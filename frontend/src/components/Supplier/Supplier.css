@@ -1,0 +1,9 @@
+.notifications {
+    width: 70%;
+    padding: 20px;
+}
+.notifications .card {
+    padding: 10px;
+    background-color: black;
+    margin-bottom: 10px;
+}

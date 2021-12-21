@@ -50,6 +50,7 @@ const CommitteeMembers = () => {
             committee:member
         }
         axios.patch (`http://localhost:5000/api/government/committee/${tenderId}`,post)
+        alert ("the committee has been added")
         history.push("/government/home")
     }
 

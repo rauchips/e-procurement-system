@@ -39,8 +39,8 @@ const EntityHome = () => {
         localStorage.removeItem('member')
     }
 
-    const onClose = () => {
-        axios.patch (`http://localhost:5000/api/government/tender/${user.json.result._id}`)
+    const onClose = (id) => {
+        axios.patch (`http://localhost:5000/api/government/tender/${id}`)
         history.go(0)
     }
 
@@ -113,11 +113,11 @@ const EntityHome = () => {
                     {
                         tender.committee.length > 0 && tender.status === false ?  
                     <td>
-                        <button className='btn btn-danger btn-md' onClick={(()=>onClose)} >Close</button>
+                        <button className='btn btn-danger btn-md' onClick={(()=>onClose (tender.rep._id))} >Close</button>
                     </td>
                     :  
                     <td>
-                        <button className='btn btn-danger btn-md' disabled ={true}>close</button>
+                        <button className='btn btn-danger btn-md' disabled ={true}>closed</button>
                     </td>
                     
                     }

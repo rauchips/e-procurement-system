@@ -4,7 +4,7 @@ import Navbar from "../Navbar/Navbar"
 import "../Sign/Sign.css";
 
 const  GovernmentLogin = () => {
-    const initialState = {entity:"",telephone:"",address:"",county:"",website:"",name:"",email:"",password:""}
+    const initialState = {entity:"",telephone:"",address:"",county:"",website:"",name:"",email:""}
     const [formData,setFormData] = useState(initialState)
     const [errors,setErrors] = useState([])
     const [isSignUp,setIsSignUp] = useState(false);
@@ -15,7 +15,19 @@ const  GovernmentLogin = () => {
     const handleChange =(e) => {
         setFormData({...formData,[e.target.name]:e.target.value})
     }
+    const [password, setPassword] = useState({
+        password: "",
+        showPassword: false,
+      });
+      
+      const handleClickShowPassword = () => {
+        setPassword({ ...password, showPassword: !password.showPassword });
+      };
     
+      
+      const handlePasswordChange = (prop) => (event) => {
+        setPassword({ ...password, [prop]: event.target.value });
+      };
     const onSubmit = (e) => {
         e.preventDefault()
         const post = {
@@ -27,7 +39,7 @@ const  GovernmentLogin = () => {
             representative:{
                 name:formData.name,
                 email:formData.email,
-                password:formData.password
+                password:password.password
             }
         }
         if (isSignUp) {
@@ -120,17 +132,28 @@ const  GovernmentLogin = () => {
                                     <input onChange={handleChange} type="email" name="email" className="form-control" id="exampleInputPassword1"/>
                                 </div>
                                 <div className="mb-3">
-                                    <label for="exampleInputPassword1"  className="form-label">Password</label>
-                                    <input onChange={handleChange} type="password" name="password" className="form-control" id="exampleInputPassword1"/>
-                                </div>
+                                <label for="exampleInputPassword1"  className="form-label">Password</label>
+                                <input type={password.showPassword ? "text" : "password"}
+                                        onChange={handlePasswordChange("password")}
+                                        value={password.password}
+                                        name="password" className="form-control" 
+                                        id="exampleInputPassword1"
+                                    />
+                            </div>
+                            <div className="form-check">
+                            <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" onClick={handleClickShowPassword}/>
+                            <label className="form-check-label" for="flexCheckDefault">
+                                Show password
+                            </label>
+                            </div>
                             </div>
                         </div>
                     </div>
                     <div className="text-center mt-3">
-                        <button type="submit" className="btn btn-outline btn-md" onClick={switchMode} >Already have an account? Click here to Login</button>
+                        <button type="submit" className="btn btn-primary btn-md">Register</button>
                     </div>
                     <div className="text-center mt-3">
-                        <button type="submit" className="btn btn-primary btn-md">Register</button>
+                        <button type="submit" className="btn btn-dark btn-md" onClick={switchMode} >Already have an account? Click here to Login</button>
                     </div>
                 </form>
                 </>
@@ -144,13 +167,24 @@ const  GovernmentLogin = () => {
                             </div>
                             <div className="mb-3">
                                 <label for="exampleInputPassword1"  className="form-label">Password</label>
-                                <input onChange={handleChange} type="password" name="password" className="form-control" id="exampleInputPassword1"/>
+                                <input type={password.showPassword ? "text" : "password"}
+                                        onChange={handlePasswordChange("password")}
+                                        value={password.password}
+                                        name="password" className="form-control" 
+                                        id="exampleInputPassword1"
+                                    />
                             </div>
-                            <div className="text-center mt-3">
-                                <button type="submit" className="btn btn-outline btn-md " onClick={switchMode}>Don't have an account? Click here to register</button>
+                            <div className="form-check">
+                            <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" onClick={handleClickShowPassword}/>
+                            <label className="form-check-label" for="flexCheckDefault">
+                                Show password
+                            </label>
                             </div>
                             <div className="text-center mt-3">
                                 <button type="submit" className="btn btn-primary btn-md">Login</button>
+                            </div>
+                            <div className="text-center mt-3">
+                                <button type="submit" className="btn btn-dark btn-md " onClick={switchMode}>Don't have an account? Click here to register</button>
                             </div>
                         </form>
                     </div>

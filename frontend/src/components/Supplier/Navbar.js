@@ -32,6 +32,9 @@ const SupplierNavbar = () => {
                     <li className="nav-item">
                     <a className='btn btn-secondary nav-link btn-sm' href='/supplier/bids-made' >Bids made</a>
                     </li>
+                    <li className="nav-item">
+                    <a className='btn btn-secondary nav-link btn-sm' href='/supplier/notifications' >Notifications <i class="fa fa-bell"></i></a>
+                    </li>
                 
                 </ul>
                 <div  style={{marginRight:"80px",display:"flex"}}>

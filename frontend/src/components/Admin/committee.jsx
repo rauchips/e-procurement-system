@@ -38,7 +38,6 @@ const AdminCommittee = () => {
                 <tr>
                 <th scope="col">Name</th>
                 <th scope="col">Telephone</th>
-                <th scope="col">Tenders</th>
                 <th scope="col">Email</th>
                 <th scope="col">Actions</th>
                 </tr>
@@ -49,7 +48,6 @@ const AdminCommittee = () => {
                 <tr>
                 <td>{committee.name}</td>
                 <td>{committee.telephone}</td>
-                <td>{committee.tender}</td>
                 <td>{committee.email}</td>
                 <td>
                     <div style={{display:"flex"}}>

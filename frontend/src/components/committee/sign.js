@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import "../Sign/Sign.css";
 
 const  CommitteeSign = () => {
-    const initialState = {name:"",telephone:"",email:"",password:""}
+    const initialState = {name:"",telephone:"",email:""}
     const [formData,setFormData] = useState(initialState)
     const [errors,setErrors] = useState([])
     const [isSignUp,setIsSignUp] = useState(true);
@@ -14,16 +14,35 @@ const  CommitteeSign = () => {
     const handleChange =(e) => {
         setFormData({...formData,[e.target.name]:e.target.value})
     }
+    const [password, setPassword] = useState({
+        password: "",
+        showPassword: false,
+      });
+      
+      const handleClickShowPassword = () => {
+        setPassword({ ...password, showPassword: !password.showPassword });
+      };
+    
+      
+      const handlePasswordChange = (prop) => (event) => {
+        setPassword({ ...password, [prop]: event.target.value });
+      };
     
     const onSubmit = (e) => {
         e.preventDefault()
+        const post = {
+            password:password.password,
+            telephone:formData.telephone,
+            email:formData.email,
+            name:formData.name
+        }
         if (isSignUp) {
         fetch ("http://localhost:5000/api/committee/register", {
             method:"POST",
             headers:{
                 'Content-Type':'application/json'
             },
-            body:JSON.stringify (formData)
+            body:JSON.stringify (post)
         })
         .then(res => res.json())
         .then(json => {
@@ -41,7 +60,7 @@ const  CommitteeSign = () => {
             headers:{
                 'Content-Type':'application/json'
             },
-            body:JSON.stringify (formData)
+            body:JSON.stringify (post)
         })
         .then(res => res.json())
         .then(json => {
@@ -83,9 +102,20 @@ const  CommitteeSign = () => {
                                     <input required onChange={handleChange} type="email" name="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
                                 </div>
                                 <div className="mb-3">
-                                    <label for="exampleInputPassword1"  className="form-label">Password</label>
-                                    <input required onChange={handleChange} type="password" name="password" className="form-control" id="exampleInputPassword1"/>
-                                </div>
+                                <label for="exampleInputPassword1"  className="form-label">Password</label>
+                                <input type={password.showPassword ? "text" : "password"}
+                                        onChange={handlePasswordChange("password")}
+                                        value={password.password}
+                                        name="password" className="form-control" 
+                                        id="exampleInputPassword1"
+                                    />
+                            </div>
+                            <div className="form-check">
+                            <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" onClick={handleClickShowPassword}/>
+                            <label className="form-check-label" for="flexCheckDefault">
+                                Show password
+                            </label>
+                            </div>
                             </div>
                             <div className="text-center mt-3">
                                 <button type="submit" className="btn btn-primary btn-md">Register</button>
@@ -106,7 +136,18 @@ const  CommitteeSign = () => {
                             </div>
                             <div className="mb-3">
                                 <label for="exampleInputPassword1"  className="form-label">Password</label>
-                                <input required onChange={handleChange} type="password" name="password" className="form-control" id="exampleInputPassword1"/>
+                                <input type={password.showPassword ? "text" : "password"}
+                                        onChange={handlePasswordChange("password")}
+                                        value={password.password}
+                                        name="password" className="form-control" 
+                                        id="exampleInputPassword1"
+                                    />
+                            </div>
+                            <div className="form-check">
+                            <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" onClick={handleClickShowPassword}/>
+                            <label className="form-check-label" for="flexCheckDefault">
+                                Show password
+                            </label>
                             </div>
                             <div className="text-center mt-3">
                                 <button type="submit" className="btn btn-primary btn-md">Login</button>
