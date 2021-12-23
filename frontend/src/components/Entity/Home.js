@@ -85,7 +85,6 @@ const EntityHome = () => {
                     <td>
                         {tender.filename}
                         <Link to={`/uploadTender/${tender.filename}`} target="_blank" download><i className='fa fa-download'></i></Link>
-                        {/* <a href= {`uploadTender/${tender.filename}`} download={tender.filename}><i className='fa fa-download'></i></a> */}
                     </td>
                     {
                         tender.committee.length === 0?  
