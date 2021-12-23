@@ -72,7 +72,7 @@ const CommitteeHome = () => {
                         <Link to={`/uploadTender/${tender.filename}`} target="_blank" download><i className='fa fa-download'></i></Link>
                 </td>
                     <td>
-                        <button className='btn btn-outline-success btn-md' onClick={(()=> onClick (tender._id))} >View Bids</button>
+                        <button className='btn btn-success btn-md' onClick={(()=> onClick (tender._id))} >View Bids</button>
                     </td>
                     </tr>
                 ))

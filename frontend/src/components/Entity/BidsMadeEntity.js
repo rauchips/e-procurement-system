@@ -74,8 +74,12 @@ const BidsMadeEntity = () => {
                     <>
                     {
                     tenderId === bid.tenders._id?
+
                     <>
-                          <tr>
+                    {
+                        bid.status === true ?
+                        <>
+                        <tr>
                 <td>{bid._id}</td>
                 <td>{bid.vendor.company}</td>
                 <td>{new Date(bid.createdAt).toLocaleDateString(undefined, options)}</td>
@@ -113,6 +117,11 @@ const BidsMadeEntity = () => {
                 }
                  
                 </tr>
+                        </>
+                        
+                        :<h5>This bid is not verified yet</h5>
+                    }
+                          
                     </>:
                     <h5>No bids made for this tender</h5>
                 }

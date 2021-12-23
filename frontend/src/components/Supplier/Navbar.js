@@ -7,7 +7,7 @@ const SupplierNavbar = () => {
     const history = useHistory ();
 
     const onClick = () => {
-        localStorage.clear()
+        localStorage.removeItem("vendorprofile")
         history.push("/")
     }
     const location = useLocation ();

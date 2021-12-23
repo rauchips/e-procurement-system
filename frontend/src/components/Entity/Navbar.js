@@ -5,7 +5,7 @@ import "../Navbar/Navbar.css"
 const EntityNavbar = () => {
     const history = useHistory ();
     const onClick = () => {
-        localStorage.clear()
+        localStorage.removeItem("entityprofile")
         history.push("/")
     }
     return (
@@ -18,17 +18,12 @@ const EntityNavbar = () => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                    <Link to = "/government/home">
                     <li className="nav-item">
-                        <button className='btn btn-secondary nav-link btn-sm'>Home</button>
+                        <a href="/government/home" className='btn btn-secondary nav-link btn-sm'>Home</a>
                     </li>
-                    </Link>
-                    <Link to = "/government/add-tender">
                     <li className="nav-item">
-                    <button className='btn btn-secondary nav-link btn-sm'>Add Tenders</button>
-                    </li>
-                    </Link>
-                
+                    <a href="/government/add-tender" className='btn btn-secondary nav-link btn-sm'>Add Tenders</a>
+                    </li>                
                 </ul>
                 <div style={{marginRight:"80px"}}>
                 <button onClick={onClick} className='btn btn-danger btn-md'>
