@@ -66,7 +66,12 @@ const SupplierHome = () => {
             </thead>
             {
                 tendersData.map(tender => (
-                    <tbody>
+                    
+                <>
+                {
+                    tender.committee.length === 0?<h5>This tender is not yet complete, committee not attended</h5>:
+                    <>
+                            <tbody>
                 <tr>
                 <td>{tender.title}</td>
                 <td>{tender.rep.representative.name}</td>
@@ -95,6 +100,9 @@ const SupplierHome = () => {
                 </td>
                 </tr>
             </tbody>
+                    </>
+                }
+                </>
                 ))
             }
             </table>
