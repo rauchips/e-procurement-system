@@ -21,9 +21,13 @@ const AdminEntities = () => {
         alert("Confirm deletion of this account")
         history.go(0)
     }
-    const onUpdate = (id,entity,name,email) => {
+    const onUpdate = (id,entity,name,email,telephone,county,address,website) => {
         localStorage.setItem("adminentityid",JSON.stringify({id}))
         localStorage.setItem("adminentity",JSON.stringify({entity}))
+        localStorage.setItem("admintelephone",JSON.stringify({telephone}))
+        localStorage.setItem("admincounty",JSON.stringify({county}))
+        localStorage.setItem("adminaddress",JSON.stringify({address}))
+        localStorage.setItem("adminwebsite",JSON.stringify({website}))
         localStorage.setItem("adminentityname",JSON.stringify({name}))
         localStorage.setItem("adminentityemail",JSON.stringify({email}))
         history.push('/admin/update-entity')
@@ -60,7 +64,7 @@ const AdminEntities = () => {
                 <td>
                     <div style={{display:"flex"}}>
                     <div className="m-2">
-                        <div className="btn btn-md btn-outline-info" onClick = {(() => onUpdate (entity._id,entity.entity,entity.representative.name,entity.representative.email))}>Update</div>
+                        <div className="btn btn-md btn-outline-info" onClick = {(() => onUpdate (entity._id,entity.entity,entity.representative.name,entity.representative.email,entity.telephone,entity.county,entity.address,entity.website))}>Update</div>
                     </div>
                     <div className="m-2">
                         <div className="btn btn-md btn-outline-danger"  onClick ={(() => onDelete (entity._id))}  >Delete</div>

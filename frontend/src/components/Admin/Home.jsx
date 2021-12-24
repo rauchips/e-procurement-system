@@ -9,6 +9,7 @@ const AdminHome = () => {
     const [committeeData,setCommitteeData] = useState ([])
     const [vendorData,setVendorData] = useState ([])
     const [entityData,setEntityData] = useState ([])
+    const [bidsData,setBidsData] = useState([])
 
 
 
@@ -49,6 +50,12 @@ const AdminHome = () => {
         const result = await response.json ()
         console.log(result)
         setEntityData(result.count)
+    }
+    const getBidData = async () => {
+        const response = await fetch ("http://localhost:5000/api/admin/bids")
+        const result = await response.json ()
+        console.log(result)
+        setBidsData(result.count)
     }
     return (
         <div>
@@ -119,10 +126,10 @@ const AdminHome = () => {
                         height={400}
                         width={500}
                         data= {{
-                            labels: ['Entities', 'vendors','committee','tenders'],
+                            labels: ['Entities', 'vendors','committee','tenders','bids'],
                             datasets: [{
-                                label: 'Registered members and tenders',
-                                data: [entityData,vendorData,committeeData,tendersData],
+                                label: 'Registered members, tenders and bids',
+                                data: [entityData,vendorData,committeeData,tendersData,bidsData],
                                 backgroundColor: [
                                     'rgba(255, 99, 132, 0.2)',
                                     'rgba(54, 162, 235, 0.2)',
@@ -160,9 +167,9 @@ const AdminHome = () => {
                     height={400}
                     width={500}
                     data= {{
-                        labels: ['Entities', 'vendors','committee','tenders'],
+                        labels: ['Entities', 'vendors','committee','tenders','bids'],
                         datasets: [{
-                            data: [entityData,vendorData,committeeData,tendersData],
+                            data: [entityData,vendorData,committeeData,tendersData,bidsData],
                             backgroundColor: [
                                 'rgba(255, 99, 132, 0.2)',
                                 'rgba(54, 162, 235, 0.2)',
@@ -196,11 +203,11 @@ const AdminHome = () => {
                 width={500} 
                     data = {
                         {
-                            labels: ['Entities', 'vendors','committee','tenders'],
+                            labels: ['Entities', 'vendors','committee','tenders','bids'],
                             datasets: [
                               {
-                                label: 'Registered members and tenders',
-                                data: [entityData,vendorData,committeeData,tendersData],
+                                label: 'Registered members, tenders and bids',
+                                data: [entityData,vendorData,committeeData,tendersData,bidsData],
                                 fill: false,
                                 backgroundColor: 'rgb(255, 99, 132)',
                                 borderColor: 'rgba(255, 99, 132, 0.2)',

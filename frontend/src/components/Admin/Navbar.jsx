@@ -1,6 +1,6 @@
 import React from 'react'
 import "../Navbar/Navbar.css"
-import {useHistory,Link } from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 
 const AdminNavbar = () => {
     const history = useHistory ();
@@ -19,19 +19,22 @@ const AdminNavbar = () => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                     <li className="nav-item">
-                        <a className='btn btn-outline-primary nav-link btn-sm' href="/admin/home" >Home</a>
+                        <a className='btn btn-primary nav-link btn-sm' href="/admin/home" >Home</a>
                     </li>
                     <li className="nav-item">
-                    <a className='btn btn-outline-primary nav-link btn-sm' href="/admin/entities" >Entities</a>
+                    <a className='btn btn-primary nav-link btn-sm' href="/admin/entities" >Entities</a>
                     </li>
                     <li className="nav-item">
-                    <a className='btn btn-outline-primary nav-link btn-sm' href='/admin/vendors' >Vendors</a>
+                    <a className='btn btn-primary nav-link btn-sm' href='/admin/vendors' >Suppliers</a>
                     </li>
                     <li className="nav-item">
-                    <a className='btn btn-outline-primary nav-link btn-sm' href='/admin/committee' >Committee</a>
+                    <a className='btn btn-primary nav-link btn-sm' href='/admin/committee' >Committee</a>
                     </li>
                     <li className="nav-item">
-                    <a className='btn btn-outline-primary nav-link btn-sm' href='/admin/tenders' >Tenders</a>
+                    <a className='btn btn-primary nav-link btn-sm' href='/admin/tenders' >Tenders</a>
+                    </li>
+                    <li className="nav-item">
+                    <a className='btn btn-primary nav-link btn-sm' href='/admin/bids' >Bids</a>
                     </li>
                 
                 </ul>

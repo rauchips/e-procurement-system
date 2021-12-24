@@ -33,6 +33,9 @@ const App = () => {
   const UpdateVendor = lazy(() => import ("./components/Admin/updateVendor"))
   const UpdateCommittee = lazy(() => import ("./components/Admin/updateCommittee"))
   const Notifications = lazy (() => import ('./components/Supplier/Notifications'))
+  const AdminBids = lazy (() => import ('./components/Admin/Bids'))
+  const UpdateBids = lazy (() => import('./components/Admin/UpdateBids'))
+  const UpdateTenders = lazy (() => import ('./components/Admin/UpdateTenders'))
 
   return (
     <div>
@@ -61,9 +64,12 @@ const App = () => {
         <Route path='/admin/vendors'  component={AdminVendors}/>
         <Route path='/admin/committee'  component={AdminCommittee}/>
         <Route path='/admin/tenders'  component={AdminTenders}/>
+        <Route path='/admin/bids'  component={AdminBids}/>
         <Route path='/admin/update-entity'  component={UpdateEntity}/>
         <Route path='/admin/update-vendor'  component={UpdateVendor}/>
         <Route path='/admin/update-committee'  component={UpdateCommittee}/>
+        <Route path='/admin/update-bid'  component={UpdateBids}/>
+        <Route path='/admin/update-tender'  component={UpdateTenders}/>
       </Suspense>
       </Router>
     </div>

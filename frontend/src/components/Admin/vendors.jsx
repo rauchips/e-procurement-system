@@ -22,9 +22,11 @@ const AdminVendors = () => {
         alert("Confirm deletion of this account")
         history.go(0)
     }
-    const onUpdate = (id,company,name,email) => {
+    const onUpdate = (id,company,name,email,telephone,address) => {
         localStorage.setItem("adminvendorid",JSON.stringify({id}))
         localStorage.setItem("adminvendor",JSON.stringify({company}))
+        localStorage.setItem("adminvendortelephone",JSON.stringify({telephone}))
+        localStorage.setItem("adminvendoraddress",JSON.stringify({address}))
         localStorage.setItem("adminvendorname",JSON.stringify({name}))
         localStorage.setItem("adminvendoremail",JSON.stringify({email}))
         history.push('/admin/update-vendor')
@@ -57,7 +59,7 @@ const AdminVendors = () => {
                 <td>
                     <div style={{display:"flex"}}>
                     <div className="m-2">
-                        <div className="btn btn-md btn-outline-info" onClick={(() => onUpdate(vendor._id,vendor.company,vendor.representative.name,vendor.representative.email))}>Update</div>
+                        <div className="btn btn-md btn-outline-info" onClick={(() => onUpdate(vendor._id,vendor.company,vendor.representative.name,vendor.representative.email,vendor.telephone,vendor.address))}>Update</div>
                     </div>
                     <div className="m-2">
                         <div className="btn btn-md btn-outline-danger" onClick={(() => onDelete(vendor._id))}>Delete</div>

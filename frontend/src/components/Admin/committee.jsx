@@ -22,10 +22,11 @@ const AdminCommittee = () => {
         alert("Confirm deletion of this account")
         history.go(0)
     }
-    const onUpdate = (id,name,email) => {
+    const onUpdate = (id,name,email,telephone) => {
         localStorage.setItem("admincommitteeid",JSON.stringify({id}))
         localStorage.setItem("admincommitteename",JSON.stringify({name}))
         localStorage.setItem("admincommitteeemail",JSON.stringify({email}))
+        localStorage.setItem("admincommittetelephone",JSON.stringify({telephone}))
         history.push('/admin/update-committee')
     }
     return (
@@ -52,7 +53,7 @@ const AdminCommittee = () => {
                 <td>
                     <div style={{display:"flex"}}>
                     <div className="m-2">
-                        <div className="btn btn-md btn-outline-info" onClick={(() => onUpdate (committee._id,committee.name,committee.email))}>Update</div>
+                        <div className="btn btn-md btn-outline-info" onClick={(() => onUpdate (committee._id,committee.name,committee.email,committee.telephone))}>Update</div>
                     </div>
                     <div className="m-2">
                         <div className="btn btn-md btn-outline-danger" onClick={(() => onDelete(committee._id))} >Delete</div>
