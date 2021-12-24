@@ -1,6 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
+const { upload } = require('../config/upload');
+const { bid } = require('../config/bid');
+
+
 const adminController = require('../controllers/admin/adminController');
 
 /*
@@ -63,6 +67,8 @@ router.route('/tenders')
 
 router.route('/tenders/:id')
   .get(adminController.getTender)
+  .patch(upload.single('tender'),adminController.patchTender)
+  .delete(adminController.deleteTender)
 
 /*
   COMMITTEE SETUP
@@ -80,8 +86,20 @@ router.route('/committees/:id')
   .patch(adminController.patchCommittee)
   .delete(adminController.deleteCommittee)
 
-//get all bids
+/*
+  BID SETUP
+*/
+
 router.route('/bids')
   .get(adminController.getAllBids)
+
+/*
+  BID BY ID SETUP
+*/
+
+router.route('/bids/:id')
+  .get(adminController.getBid)
+  .patch(bid.single('bid'),adminController.patchBid)
+  .delete(adminController.deleteBid)
 
 module.exports = router;
